@@ -15,8 +15,8 @@ public class Point {
     }
 
     public static void main(String[] args) {
-        Point a = new Point(0, 1);
-        Point b = new Point(2, 5);
+        Point a = new Point(1, 3);
+        Point b = new Point(2, 4);
         // сделаем вызов метода
         System.out.println("x1 = " + a.x);
         System.out.println("y1 = " + a.y);
