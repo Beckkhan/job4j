@@ -24,7 +24,7 @@ public class Triangle {
      * @return Полупериметр.
      */
     public double period(double ab, double ac, double bc) {
-        return (ab + ac + bc)/2;
+        return ((ab + ac + bc) / 2);
     }
     /**
      * Метод должен вычислить площадь треугольника.
@@ -56,7 +56,9 @@ public class Triangle {
      */
     private boolean exist(double ab, double ac, double bc) {
 
-        if ((ab + ac) > bc ) return true;
-        else return false;
+        if ((ab + ac) > bc) {
+            return true;
+        }
+        return false;
     }
 }
