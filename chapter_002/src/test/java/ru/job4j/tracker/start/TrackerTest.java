@@ -25,14 +25,14 @@ public class TrackerTest {
         Item previous = new Item("test1", "testDescription", 123L);
         // Добавляем заявку в трекер. Теперь в объект проинициализирован id.
         tracker.add(previous);
-        System.out.println(Arrays.asList(previous));
+        System.out.println(previous.getId() + previous.getName() + previous.getDescription());
         // Создаем новую заявку.
         Item next = new Item("test2", "testDescription2", 1234L);
         // Проставляем старый id из previous, который был сгенерирован выше.
         next.setId(previous.getId());
         // Обновляем заявку в трекере.
         tracker.replace(previous.getId(), next);
-        System.out.println(Arrays.asList(next));
+        System.out.println(next.getId() + next.getName() + next.getDescription());
         // Проверяем, что заявка с таким id имеет новые имя test2.
         assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
         }
