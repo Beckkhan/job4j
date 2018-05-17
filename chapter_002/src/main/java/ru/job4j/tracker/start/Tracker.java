@@ -35,6 +35,15 @@ public class Tracker {
         }
     }
 
+    public void delete(String id) {
+        for (int index = 0; index < this.items.length; index++) {
+            if (id != null && this.items[index].getId().equals(id)) {
+                System.arraycopy(this.items, index + 1, this.items, index, this.items.length - 1 - index);
+                break;
+            }
+        }
+    }
+
     private String generateId() {
         return String.valueOf(System.currentTimeMillis() + RN.nextInt());
     }
