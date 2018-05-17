@@ -20,6 +20,24 @@ public class TrackerTest {
     }
 
     @Test
+    public void whenFindByName() {
+        Tracker tracker = new Tracker();
+        Item one = new Item("one", "testOne", 1L);
+        Item two = new Item("two", "testTwo", 2L);
+        Item three = new Item("one", "testThree", 3L);
+        Item four = new Item("four", "testFour", 4L);
+        Item five = new Item("five", "testFive", 5L);
+        tracker.add(one);
+        tracker.add(two);
+        tracker.add(three);
+        tracker.add(four);
+        tracker.add(five);
+        Item[] expect = {one, three};
+        Item[] result = tracker.findByName("one");
+        assertThat(result, is(expect));
+    }
+
+    @Test
     public void whenReplaceNameThenReturnNewName() {
         Tracker tracker = new Tracker();
         Item previous = new Item("test1", "testDescription", 123L);

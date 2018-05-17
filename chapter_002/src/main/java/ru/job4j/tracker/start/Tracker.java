@@ -26,6 +26,20 @@ public class Tracker {
         return result;
     }
 
+    public Item[] findByName(String key) {
+        Item[] names = new Item[this.position];
+        int k = 0;
+        for (int index = 0; index < this.position; index++) {
+            if (key != null && this.items[index].getName().equals(key)) {
+                names[k] = items[index];
+                k++;
+            }
+        }
+        Item[] result = new Item[k];
+        System.arraycopy(names, 0, result, 0, k);
+        return result;
+    }
+
     public void replace(String id, Item item) {
         for (int index = 0; index < this.items.length; index++) {
             if (this.items[index] != null && this.items[index].getId().equals(id)) {
