@@ -49,6 +49,8 @@ public class TrackerTest {
         tracker.delete(second.getId());
         Item[] expect = {first, third};
         Item[] result = tracker.getAll();
+        System.out.println(Arrays.toString(result));
+        System.out.println(Arrays.toString(expect));
         assertThat(result, is(expect));
     }
 }
