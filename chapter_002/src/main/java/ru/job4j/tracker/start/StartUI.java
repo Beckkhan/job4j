@@ -3,7 +3,6 @@ package ru.job4j.tracker.start;
 import ru.job4j.tracker.models.*;
 
 public class StartUI {
-	
 	/**
      * Константа меню для добавления новой заявки.
      */
@@ -156,7 +155,7 @@ public class StartUI {
 	
 	
 	/**
-     * Запускт программы.
+     * Запуск программы.
      * @param args
      */
     public static void main(String[] args) {
