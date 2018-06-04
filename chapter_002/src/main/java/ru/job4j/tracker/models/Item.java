@@ -22,6 +22,14 @@ public class Item {
 	}
 
 	public Item(String name, String desc) {
+		this.name = name;
+		this.description = desc;
+	}
+
+	public Item(String name, String desc, String id) {
+		this.name = name;
+		this.description = desc;
+		this.id = id;
 	}
 
 	public String getName() {
