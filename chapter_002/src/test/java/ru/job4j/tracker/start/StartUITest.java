@@ -34,7 +34,6 @@ public class StartUITest {
     public void whenDeleteThenTrackerHasDeletedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item());
-        System.out.println("Создана заявка с Id : " + item.getId());
         Input input = new StubInput(new String[]{"3", item.getId(), "6"});
         new StartUI(input, tracker).init();
         assertThat(tracker.findById(item.getId()).getName(), is(nullValue()));
