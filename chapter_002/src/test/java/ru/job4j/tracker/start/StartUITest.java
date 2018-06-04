@@ -4,6 +4,7 @@ import org.junit.Test;
 import ru.job4j.tracker.models.*;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
@@ -36,7 +37,6 @@ public class StartUITest {
         System.out.println("Создана заявка с Id : " + item.getId());
         Input input = new StubInput(new String[]{"3", item.getId(), "6"});
         new StartUI(input, tracker).init();
-        String exp = null;
-        assertThat(tracker.findById(item.getId()).getName(), is(exp));
+        assertThat(tracker.findById(item.getId()).getName(), is(nullValue()));
     }
 }
