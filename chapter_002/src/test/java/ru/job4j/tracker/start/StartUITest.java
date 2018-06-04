@@ -14,6 +14,7 @@ public class StartUITest {
         new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
         assertThat(tracker.getAll()[0].getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
+
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
         // создаём Tracker
@@ -26,5 +27,16 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         // проверяем, что отредактированный элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findById(item.getId()).getName(), is("test name"));
+    }
+
+    @Test
+    public void whenDeleteThenTrackerHasDeletedValue() {
+        Tracker tracker = new Tracker();
+        Item item = tracker.add(new Item());
+        System.out.println("Создана заявка с Id : " + item.getId());
+        Input input = new StubInput(new String[]{"3", item.getId(), "6"});
+        new StartUI(input, tracker).init();
+        String exp = null;
+        assertThat(tracker.findById(item.getId()).getName(), is(exp));
     }
 }
