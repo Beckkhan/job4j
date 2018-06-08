@@ -1,7 +1,5 @@
 package ru.job4j.tracker.start;
 
-import org.hamcrest.Matchers;
-import org.hamcrest.core.Is;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -141,6 +139,28 @@ public class StartUITest {
                                 .append("------------ Поиск заявки по имени --------------")
                                 .append(System.lineSeparator())
                                 .append("--- Найдена заявка с именем: " + three.getName() + "- id - " + three.getId())
+                                .append(System.lineSeparator())
+                                .append("Меню:\n0. Add new Item\n1. Show all items\n2. Edit item\n3. Delete item\n4. Find item by Id\n5. Find items by name\n6. Exit Program\nSelect")
+                                .append(System.lineSeparator())
+                                .toString()
+                )
+        );
+    }
+
+    @Test
+    public void whenAddItemWithStubInputThenTrackerAddItem() {
+        Tracker tracker = new Tracker();
+        Input input = new StubInput(new String[]{"0", "newtestname", "newtestdescription", "6"});
+        new StartUI(input, tracker).init();
+        assertThat(
+                new String(out.toByteArray()),
+                is(
+                        new StringBuilder()
+                                .append("Меню:\n0. Add new Item\n1. Show all items\n2. Edit item\n3. Delete item\n4. Find item by Id\n5. Find items by name\n6. Exit Program\nSelect")
+                                .append(System.lineSeparator())
+                                .append("------------ Добавление новой заявки --------------")
+                                .append(System.lineSeparator())
+                                .append("------------ Новая заявка с getId : " + tracker.getAll()[0].getId() + "-----------")
                                 .append(System.lineSeparator())
                                 .append("Меню:\n0. Add new Item\n1. Show all items\n2. Edit item\n3. Delete item\n4. Find item by Id\n5. Find items by name\n6. Exit Program\nSelect")
                                 .append(System.lineSeparator())
