@@ -103,7 +103,7 @@ public class StartUI {
     private void showAllItems() {
         System.out.println("------------ Отображение всех заявок --------------");
         for (Item item : this.tracker.getAll()) {
-	           System.out.println("Имя заявки: " + item.getName() + "Id заявки: " + item.getId());
+	           System.out.println("Имя заявки: " + item.getName() + ". Id заявки: " + item.getId());
 	       }
     }
 
@@ -140,7 +140,7 @@ public class StartUI {
     }
 
 	private void showMenu() {
-        System.out.print("Меню:\n0. Add new Item\n1. Show all items\n2. Edit item\n3. Delete item\n4. Find item by Id\n5. Find items by name\n6. Exit Program\nSelect");
+        System.out.println("Меню:\n0. Add new Item\n1. Show all items\n2. Edit item\n3. Delete item\n4. Find item by Id\n5. Find items by name\n6. Exit Program\nSelect");
     }
 	
 	/**public void init() {
