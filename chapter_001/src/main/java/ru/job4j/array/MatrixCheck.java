@@ -7,8 +7,16 @@ public class MatrixCheck {
             for (int j = 0; j < data[i].length - 1; j++) {
                 if ((i + j) % 2 == 0 && data[i][j] == data[i+1][j+1]) {
 					result = true;
-				} 
+				}
 				else {
+                    result = false;
+                }
+            }
+            for (int j = data[i].length - 1; j>0; j--) {
+                if ((i + j) % 2 == 0 && data[i][j] == data[i+1][j-1]) {
+                    result = true;
+                }
+                else {
                     result = false;
                 }
             }
