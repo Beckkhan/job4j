@@ -85,7 +85,7 @@ public class TicTacToe extends Application {
     private EventHandler<MouseEvent> buildMouseEvent(Group panel) {
         return event -> {
             Figure3T rect = (Figure3T) event.getTarget();
-            if (this.checkState()) {
+            if (this.checkState()); {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     rect.take(true);
                     panel.getChildren().add(

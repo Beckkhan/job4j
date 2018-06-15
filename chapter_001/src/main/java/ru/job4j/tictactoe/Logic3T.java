@@ -8,27 +8,79 @@ public class Logic3T {
     }
 
     public boolean isWinnerX() {
-        boolean result = true;
-        for (int i = 0; i < this.table.length; i++) {
-            result = true;
-            for (int j = 0; j < this.table.length - 1; j++) {
-                if (!(this.table[i][j].hasMarkX() && this.table[i][j + 1].hasMarkX())) {
-                    result = false;
+        boolean dia = false;
+        boolean row = false;
+        boolean column = false;
+
+        for (int i = 0; i < this.table.length - 1; i++) {
+            for (int j = 0; j < this.table[i].length; j++) {
+                if ((i + j) % 2 == 0 && (this.table[i][j].hasMarkX() && this.table[i + 1][i + 1].hasMarkX())
+                        && (this.table[i][j].hasMarkX()) && this.table[i+1][this.table[i+1].length - i - 2].hasMarkX()) {
+                    dia = true;
                     break;
                 }
             }
-            if (result) {
-                break;
+        }
+        for (int i = 0; i < this.table.length; i++) {
+            for (int j = 0; j < this.table.length - 1; j++) {
+                if ((this.table[i][j].hasMarkX()) && (this.table[i][j + 1].hasMarkX())) {
+                    row = true;
+                    break;
+                }
             }
         }
-        return result;
+        for (int i = 0; i < this.table.length - 1; i++) {
+            for (int j = 0; j < this.table.length; j++) {
+                if (this.table[i][j].hasMarkX() && this.table[i+1][j].hasMarkX()) {
+                    column = true;
+                    break;
+                }
+            }
+        }
+        return dia || row || column;
     }
 
     public boolean isWinnerO() {
-        return false;
+        boolean dia = false;
+        boolean row = false;
+        boolean column = false;
+
+        for (int i = 0; i < this.table.length - 1; i++) {
+            for (int j = 0; j < this.table[i].length; j++) {
+                if ((i + j) % 2 == 0 && (this.table[i][j].hasMarkO() && this.table[i + 1][i + 1].hasMarkO())
+                        && (this.table[i][j].hasMarkO()) && this.table[i+1][this.table[i+1].length - i - 2].hasMarkO()) {
+                    dia = true;
+                    break;
+                }
+            }
+        }
+        for (int i = 0; i < this.table.length; i++) {
+            for (int j = 0; j < this.table.length - 1; j++) {
+                if ((this.table[i][j].hasMarkO()) && (this.table[i][j + 1].hasMarkO())) {
+                    row = true;
+                    break;
+                }
+            }
+        }
+        for (int i = 0; i < this.table.length - 1; i++) {
+            for (int j = 0; j < this.table.length; j++) {
+                if (this.table[i][j].hasMarkO() && this.table[i+1][j].hasMarkO()) {
+                    column = true;
+                    break;
+                }
+            }
+        }
+        return dia || row || column;
     }
 
     public boolean hasGap() {
-        return true;
+        boolean gapIsFree = false;
+        for(Figure3T[] row : table)
+            for(Figure3T cell : row)
+                if((!cell.hasMarkX()) && (!cell.hasMarkO())) {
+                    gapIsFree = true;
+                    break;
+                }
+        return gapIsFree;
     }
 }
