@@ -60,7 +60,7 @@ public class Tracker {
     }
 
     private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt());
+        return String.valueOf(RN.nextInt(100));
     }
 
     public Item[] getAll() {

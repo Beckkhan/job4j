@@ -85,7 +85,7 @@ public class TicTacToe extends Application {
     private EventHandler<MouseEvent> buildMouseEvent(Group panel) {
         return event -> {
             Figure3T rect = (Figure3T) event.getTarget();
-            if (this.checkState()); {
+            if (this.checkState()) {
                 if (event.getButton() == MouseButton.PRIMARY) {
                     rect.take(true);
                     panel.getChildren().add(
@@ -93,9 +93,7 @@ public class TicTacToe extends Application {
                     );
                 } else {
                     rect.take(false);
-                    panel.getChildren().add(
-                            this.buildMarkO(rect.getX(), rect.getY(), 50)
-                    );
+                    panel.getChildren().add(this.buildMarkO(rect.getX(), rect.getY(), 50));
                 }
                 this.checkState();
             }
