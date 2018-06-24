@@ -3,6 +3,7 @@ package ru.job4j.tracker.start;
 import java.util.*;
 
 public class ConsoleInput implements Input {
+
 	private Scanner scanner = new Scanner(System.in);
 	
 	public String ask(String question) {
@@ -19,7 +20,7 @@ public class ConsoleInput implements Input {
 				break;
 			}
 		}
-		if(exist) {
+		if (exist) {
 			return key;
 		} else {
 			throw new MenuOutException("Out of menu range. ");

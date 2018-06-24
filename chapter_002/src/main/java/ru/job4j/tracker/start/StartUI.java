@@ -1,10 +1,7 @@
 package ru.job4j.tracker.start;
 
-import ru.job4j.tracker.models.*;
-
 public class StartUI {
-	
-	private int[] ranges = new int[] {1, 2, 3, 4};
+
 	private Input input;
 	private Tracker tracker;
 	
@@ -25,7 +22,7 @@ public class StartUI {
 	}
 	
 	public static void main(String[] args) {
-        new StartUI(new ValidateInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
     }
 
 
