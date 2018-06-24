@@ -4,6 +4,7 @@ import ru.job4j.tracker.models.*;
 
 public class StartUI {
 	
+	private int[] ranges = new int[] {1, 2, 3, 4};
 	private Input input;
 	private Tracker tracker;
 	
@@ -18,14 +19,13 @@ public class StartUI {
 		
 		do {
 			menu.show();
-			int key = Integer.valueOf(input.ask("Select:"));
-			menu.select(key);
+			menu.select(input.ask("Select:", menu.getActionsNum()));
 		}
 		while (!"y".equals(this.input.ask("Exit?(y):")));
 	}
 	
 	public static void main(String[] args) {
-        new StartUI(new ConsoleInput(), new Tracker()).init();
+        new StartUI(new ValidateInput(), new Tracker()).init();
     }
 
 

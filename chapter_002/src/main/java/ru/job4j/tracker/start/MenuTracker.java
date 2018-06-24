@@ -43,6 +43,14 @@ public class MenuTracker {
 	public void select(int key) {
 		this.actions[key].execute(this.input, this.tracker);
 	}
+	
+	public int[] getActionsNum() {
+		int[] range = new int[this.actions.length];
+		for (int i = 0; i < this.actions.length; i++) {
+			range[i] = i;
+		}
+		return range;
+	}
 
 	public void show() {
 		for (UserAction action : this.actions) {
