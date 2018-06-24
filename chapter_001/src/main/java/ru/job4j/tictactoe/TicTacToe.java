@@ -93,9 +93,11 @@ public class TicTacToe extends Application {
                     );
                 } else {
                     rect.take(false);
-                    panel.getChildren().add(this.buildMarkO(rect.getX(), rect.getY(), 50));
+                    panel.getChildren().add(
+                            this.buildMarkO(rect.getX(), rect.getY(), 50)
+                    );
                 }
-                this.checkState();
+                this.checkWinner();
             }
         };
     }

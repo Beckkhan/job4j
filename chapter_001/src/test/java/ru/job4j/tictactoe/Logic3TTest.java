@@ -66,7 +66,6 @@ public class Logic3TTest {
         Logic3T login = new Logic3T(table);
         assertThat(login.isWinnerO(), is(true));
     }
-
     @Test
     public void whenHasGas() {
         Figure3T[][] table = {
