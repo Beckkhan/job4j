@@ -75,7 +75,7 @@ public class StartUITest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("0. Add the new item. \r\n1. Show all items. \r\n2. Edit item. \r\n3. Delete item. \r\n4. Find item by id. \r\n5. Find item by name. ")
+                                .append("0: Add the new item.\r\n1: Show all items.\r\n2: Edit item.\r\n3: Delete item.\r\n4: Find item by id.\r\n5: Find item by name.")
                                 .append(System.lineSeparator())
                                 .append(one.getId() + ". " + one.getName())
                                 .append(System.lineSeparator())
@@ -103,7 +103,7 @@ public class StartUITest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("0. Add the new item. \r\n1. Show all items. \r\n2. Edit item. \r\n3. Delete item. \r\n4. Find item by id. \r\n5. Find item by name. ")
+                                .append("0: Add the new item.\r\n1: Show all items.\r\n2: Edit item.\r\n3: Delete item.\r\n4: Find item by id.\r\n5: Find item by name.")
                                 .append(System.lineSeparator())
                                 .append("Found item with id: " + second.getId() + " and name: " + second.getName())
                                 .append(System.lineSeparator())
@@ -126,7 +126,7 @@ public class StartUITest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("0. Add the new item. \r\n1. Show all items. \r\n2. Edit item. \r\n3. Delete item. \r\n4. Find item by id. \r\n5. Find item by name. ")
+                                .append("0: Add the new item.\r\n1: Show all items.\r\n2: Edit item.\r\n3: Delete item.\r\n4: Find item by id.\r\n5: Find item by name.")
                                 .append(System.lineSeparator())
                                 .append("Found item with name: " + three.getName() + " and id: " + three.getId())
                                 .append(System.lineSeparator())
@@ -144,7 +144,7 @@ public class StartUITest {
                 new String(out.toByteArray()),
                 is(
                         new StringBuilder()
-                                .append("0. Add the new item. \r\n1. Show all items. \r\n2. Edit item. \r\n3. Delete item. \r\n4. Find item by id. \r\n5. Find item by name. ")
+                                .append("0: Add the new item.\r\n1: Show all items.\r\n2: Edit item.\r\n3: Delete item.\r\n4: Find item by id.\r\n5: Find item by name.")
                                 .append(System.lineSeparator())
                                 .toString()
                 )
