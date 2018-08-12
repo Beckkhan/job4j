@@ -5,11 +5,11 @@ import ru.job4j.chess.figures.Figure;
 import ru.job4j.chess.exception.*;
 
 /**
- *
- * @author Petr Arsentev (parsentev@yandex.ru)
+ * @author Khan Vyacheslav (beckkhan@mail.ru)
  * @version $Id$
  * @since 0.1
  */
+
 public class BishopBlack implements Figure {
     private final Cell position;
 

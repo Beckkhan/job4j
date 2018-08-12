@@ -17,6 +17,12 @@ import ru.job4j.chess.figures.Figure;
 import ru.job4j.chess.figures.black.*;
 import ru.job4j.chess.figures.white.*;
 
+/**
+ * @author Khan Vyacheslav (beckkhan@mail.ru)
+ * @version $Id$
+ * @since 0.1
+ */
+
 public class Chess extends Application {
     private static final String JOB4J = "Шахматы на www.job4j.ru";
     private final int size = 8;

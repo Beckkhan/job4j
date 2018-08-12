@@ -1,14 +1,15 @@
 package ru.job4j.chess.figures.white;
 
+import ru.job4j.chess.exception.*;
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.Figure;
 
 /**
- *
- * @author Petr Arsentev (parsentev@yandex.ru)
+ * @author Khan Vyacheslav (beckkhan@mail.ru)
  * @version $Id$
  * @since 0.1
  */
+
 public class RookWhite implements Figure {
     private final Cell position;
 
@@ -22,7 +23,12 @@ public class RookWhite implements Figure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest) {
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
+
+        if (!((source.getX() == dest.getX()) && (source.getY() != dest.getY())
+                || ((source.getX() != dest.getX()) && (source.getY() == dest.getY())))) {
+            throw new ImpossibleMoveException("It`s impossible to move this way");
+        }
         return new Cell[] {dest};
     }
 

@@ -1,14 +1,15 @@
 package ru.job4j.chess.figures.black;
 
+import ru.job4j.chess.exception.*;
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.Figure;
 
 /**
- *
- * @author Petr Arsentev (parsentev@yandex.ru)
+ * @author Khan Vyacheslav (beckkhan@mail.ru)
  * @version $Id$
  * @since 0.1
  */
+
 public class PawnBlack implements Figure {
     private final Cell position;
 
@@ -22,12 +23,11 @@ public class PawnBlack implements Figure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest) {
-        Cell[] steps = new Cell[0];
-        if (source.getY() == dest.getY() + 1 && source.getX() == dest.getX()) {
-            steps = new Cell[] {dest};
+    public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
+        if (!(source.getY() == (dest.getY() - 1) && source.getX() == dest.getX())) {
+            throw new ImpossibleMoveException("It`s impossible to move this way");
         }
-        return steps;
+        return new Cell[] {dest};
     }
 
     @Override
