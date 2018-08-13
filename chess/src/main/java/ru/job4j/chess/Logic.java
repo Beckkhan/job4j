@@ -22,23 +22,21 @@ public class Logic {
         boolean rst = false;
         try {
             int index = this.findBy(source);
+            if (index != -1) {
+                Cell[] steps = this.figures[index].way(source, dest);
+                checkWay(steps, this.figures);
+                if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                    rst = true;
+                    this.figures[index] = this.figures[index].copy(dest);
+                }
+
+            }
         } catch (FigureNotFoundException fnfe) {
             System.out.println("Please try another figure");
-        }
-        if (index != -1) {
-            Cell[] steps = null;
-            try {
-                steps = this.figures[index].way(source, dest);
-                checkWay(steps, this.figures);
-            } catch (ImpossibleMoveException ime) {
-                System.out.println("Please try another move");
-            } catch (OccupiedWayException owe) {
-                System.out.println("Please try another way");
-            }
-            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                rst = true;
-                this.figures[index] = this.figures[index].copy(dest);
-            }
+        }  catch (ImpossibleMoveException ime) {
+            System.out.println("Please try another move");
+        } catch (OccupiedWayException owe) {
+            System.out.println("Please try another way");
         }
         return rst;
     }
@@ -69,9 +67,9 @@ public class Logic {
      * @throws OccupiedWayException Если на пути движения есть фигура.
      */
     private void checkWay(Cell[] steps, Figure[] figures) throws OccupiedWayException {
-        for (int i = 0; i < steps.length ; i++) {
-            for (int j = 0; j < figures.length ; j++) {
-                if(figures[j]!=null && steps[i].equals(figures[j].position())){
+        for (int i = 0; i < steps.length; i++) {
+            for (int j = 0; j < figures.length; j++) {
+                if (figures[j] != null && steps[i].equals(figures[j].position())) {
                     throw new OccupiedWayException("There is a figure on the way");
                 }
                 break;
