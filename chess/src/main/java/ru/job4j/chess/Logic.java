@@ -18,36 +18,25 @@ public class Logic {
         this.figures[this.index++] = figure;
     }
 
-    public boolean move(Cell source, Cell dest) {
+    public boolean move(Cell source, Cell dest) throws ImpossibleMoveException, OccupiedWayException, FigureNotFoundException {
         boolean rst = false;
-        try {
-            int index = this.findBy(source);
-            if (index != -1) {
-                Cell[] steps = this.figures[index].way(source, dest);
-                checkWay(steps, this.figures);
-                if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
-                    rst = true;
-                    this.figures[index] = this.figures[index].copy(dest);
-                }
-
+        int index = this.findBy(source);
+        if (index != -1) {
+            Cell[] steps = this.figures[index].way(source, dest);
+            checkWay(steps, this.figures);
+            if (steps.length > 0 && steps[steps.length - 1].equals(dest)) {
+                rst = true;
+                this.figures[index] = this.figures[index].copy(dest);
             }
-        } catch (FigureNotFoundException fnfe) {
-            System.out.println("Please try another figure");
-        }  catch (ImpossibleMoveException ime) {
-            System.out.println("Please try another move");
-        } catch (OccupiedWayException owe) {
-            System.out.println("Please try another way");
         }
         return rst;
     }
-
     public void clean() {
         for (int position = 0; position != this.figures.length; position++) {
             this.figures[position] = null;
         }
         this.index = 0;
     }
-
     private int findBy(Cell cell) throws FigureNotFoundException {
         int rst = -1;
         for (int index = 0; index != this.figures.length; index++) {
@@ -63,17 +52,20 @@ public class Logic {
     /**
      * Метод, проверяющий наличие свободного пути для движения фигуры.
      * @param steps Массив шагов.
-     * @param figures Массив фигур.
      * @throws OccupiedWayException Если на пути движения есть фигура.
      */
-    private void checkWay(Cell[] steps, Figure[] figures) throws OccupiedWayException {
-        for (int i = 0; i < steps.length; i++) {
-            for (int j = 0; j < figures.length; j++) {
-                if (figures[j] != null && steps[i].equals(figures[j].position())) {
-                    throw new OccupiedWayException("There is a figure on the way");
-                }
-                break;
-            }
-        }
-    }
+     private void checkWay(Cell[] steps, Figure[] figures) throws OccupiedWayException {
+         boolean result = true;
+         for (int i = 0; i < steps.length; i++) {
+             for (int j = 0; j < figures.length; j++) {
+                 if (figures[j] != null && steps[i].equals(figures[j].position())) {
+                     result = false;
+                     break;
+                 }
+             }
+         }
+         if (!result) {
+             throw new OccupiedWayException("There is a figure on the way");
+         }
+     }
 }

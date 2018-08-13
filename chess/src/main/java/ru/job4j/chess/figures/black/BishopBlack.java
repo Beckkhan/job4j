@@ -27,11 +27,11 @@ public class BishopBlack implements Figure {
 
         int deltaX = source.getX() - dest.getX();
         int deltaY = source.getY() - dest.getY();
+        int size = Math.abs(deltaX);
         if (Math.abs(deltaX) != Math.abs(deltaY)) {
             throw new ImpossibleMoveException("It`s impossible to move this way");
         }
 
-        int size = Math.abs(deltaX);
         Cell[] steps = new Cell[size];
         for (int i = 0; i < size; i++) {
             steps[i] = Cell.setNewCell((source.getX() + (deltaX < 0 ? 1 : -1) * (i + 1)),
