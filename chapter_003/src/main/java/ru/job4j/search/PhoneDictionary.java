@@ -21,7 +21,7 @@ public class PhoneDictionary {
             if (!(person != null && (person.getName().equalsIgnoreCase(key)
                                     || person.getSurname().equalsIgnoreCase(key)
                                     || person.getPhone().equalsIgnoreCase(key)
-                                    || person.getAddress() == key))) {
+                                    || person.getAddress().equalsIgnoreCase(key)))) {
                 System.out.println("По указанным данным информации не найдено.");
                 break;
             }
