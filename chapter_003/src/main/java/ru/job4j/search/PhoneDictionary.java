@@ -18,7 +18,10 @@ public class PhoneDictionary {
     public List<Person> find(String key) {
         List<Person> result = new ArrayList<>();
         for (Person person : persons) {
-            if (!(person != null && (person.getName() == key || person.getSurname() == key || person.getPhone() == key || person.getAddress() == key))) {
+            if (!(person != null && (person.getName().equalsIgnoreCase(key)
+                                    || person.getSurname().equalsIgnoreCase(key)
+                                    || person.getPhone().equalsIgnoreCase(key)
+                                    || person.getAddress() == key))) {
                 System.out.println("По указанным данным информации не найдено.");
                 break;
             }
