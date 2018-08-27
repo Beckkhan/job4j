@@ -12,8 +12,9 @@ public class ConvertList2Array {
                 if (index < list.size()) {
                     array[i][j] = list.get(index);
                     index++;
-                } else {
-                    array[i][j] = 0;
+                    if (index == list.size() - 1) {
+                        break;
+                    }
                 }
             }
         }
