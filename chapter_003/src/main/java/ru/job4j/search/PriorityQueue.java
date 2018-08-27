@@ -21,6 +21,7 @@ public class PriorityQueue {
                 break;
             } else if (task.getPriority() > tasks.getLast().getPriority()) {
                 tasks.addLast(task);
+                break;
             }
         }
     }
