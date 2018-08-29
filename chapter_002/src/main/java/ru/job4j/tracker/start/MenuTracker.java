@@ -12,7 +12,8 @@ class EditItem extends BaseAction {
 		String id = input.ask("Enter the id of the item to be edited:");
 		String name = input.ask("Enter the name of the item to be edited:");
 		String desc = input.ask("Enter the description of the item to be edited:");
-		tracker.replace(new Item(name, desc, id));
+		Item item = new Item(name, desc, id);
+		tracker.replace(item.getId(), item);
 	}
 }
 

@@ -26,11 +26,12 @@ public class Tracker {
         return result;
     }
 
-    public void replace(Item item) {
+    public void replace(String id, Item item) {
         ListIterator<Item> iterator = this.items.listIterator();
         while (iterator.hasNext()) {
             if (iterator.next().getId().equals(item.getId())) {
                 iterator.set(item);
+                item.setId(id);
                 break;
             }
         }
