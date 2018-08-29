@@ -6,7 +6,7 @@ import java.util.*;
 public class Tracker {
 
     /** items - список заявок, теперь используем ArrayList вместо обычного массива */
-    private final ArrayList<Item> items = new ArrayList<>();
+    private final List<Item> items = new ArrayList<>();
     private static final Random RN = new Random();
 
     public Item add(Item item) {
@@ -47,7 +47,7 @@ public class Tracker {
         }
     }
 
-    public ArrayList<Item> findByName(String key) {
+    public List<Item> findByName(String key) {
         ListIterator<Item> iterator = this.items.listIterator();
         ArrayList<Item> result = new ArrayList<>();
         Item item;
@@ -64,7 +64,7 @@ public class Tracker {
         return String.valueOf(RN.nextInt(100));
     }
 
-    public ArrayList<Item> getAll() {
+    public List<Item> getAll() {
         return this.items;
     }
 }

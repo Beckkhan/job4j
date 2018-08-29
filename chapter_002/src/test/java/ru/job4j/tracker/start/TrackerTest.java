@@ -5,6 +5,7 @@ import ru.job4j.tracker.models.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
@@ -33,10 +34,10 @@ public class TrackerTest {
         tracker.add(three);
         tracker.add(four);
         tracker.add(five);
-        ArrayList<Item> expect = new ArrayList<>();
+        List<Item> expect = new ArrayList<>();
         expect.add(one);
         expect.add(three);
-        ArrayList<Item> result = tracker.findByName("one");
+        List<Item> result = tracker.findByName("one");
         assertThat(result, is(expect));
     }
 
@@ -68,10 +69,10 @@ public class TrackerTest {
         tracker.add(second);
         tracker.add(third);
         tracker.delete(second.getId());
-        ArrayList<Item> expect = new ArrayList<>();
+        List<Item> expect = new ArrayList<>();
         expect.add(first);
         expect.add(third);
-        ArrayList<Item> result = tracker.getAll();
+        List<Item> result = tracker.getAll();
         assertThat(result, is(expect));
     }
 }
