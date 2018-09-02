@@ -4,7 +4,7 @@ import java.util.*;
 
 public class SortUser {
 
-    public Set<User> sort (List<User> users) {
+    public Set<User> sort(List<User> users) {
         Set<User> result = new TreeSet<>();
         result.addAll(users);
         return result;
@@ -33,7 +33,7 @@ public class SortUser {
         }
     }
 
-    public List<User> sortByAllFields (List<User> users, AllFieldsCompare allFieldsComparator) {
+    public List<User> sortByAllFields(List<User> users, AllFieldsCompare allFieldsComparator) {
         Collections.sort(users, allFieldsComparator);
         return users;
     }
