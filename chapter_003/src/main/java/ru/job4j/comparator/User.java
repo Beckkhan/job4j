@@ -21,4 +21,8 @@ public class User implements Comparable<User> {
     public int compareTo(User o) {
         return this.age.compareTo(o.age);
     }
+
+    public String toString() {
+        return String.format("%s : %d", this.name, this.age);
+    }
 }
