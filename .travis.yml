@@ -8,7 +8,6 @@ sudo: false
 # Здесь используется сторонний сервис https://codecov.io/
 after_success:
   - bash <(curl -s https://codecov.io/bash)
-
 # Отправлять уведомление на почту mailto: beckkhan@mail.ru если сборка упала
 notifications:
   email:
