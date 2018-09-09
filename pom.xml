@@ -19,6 +19,7 @@
         <module>chapter_003</module>
         <module>chess</module>
         <module>chapter_004</module>
+        <module>junior_001</module>
     </modules>
 	
 	<dependencies>
