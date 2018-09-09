@@ -14,7 +14,7 @@ public class JaggedArrayIteratorTest {
     private Iterator<Integer> it;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         it = new MatrixIterator(new int[][]{{1}, {3, 4}, {7}});
     }
 
