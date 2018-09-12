@@ -12,8 +12,11 @@ public class Converter {
 
             @Override
             public boolean hasNext() {
-                if (!insideit.hasNext() && it.hasNext()) {
-                    insideit = it.next();
+                while (!insideit.hasNext() && it.hasNext()) {
+                    this.insideit = it.next();
+                    if (insideit.hasNext()) {
+                        break;
+                    }
                 }
                 return insideit.hasNext();
             }
