@@ -19,7 +19,7 @@ public class MatrixIteratorTest {
     }
 
     @Test
-    public void hasNextNextSequentialInvocation() {
+    public void hasNextAndNextMethodSimpleCheck() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
         assertThat(it.hasNext(), is(true));
@@ -36,7 +36,7 @@ public class MatrixIteratorTest {
     }
 
     @Test
-    public void testsThatNextMethodDoesntDependsOnPriorHasNextInvocation() {
+    public void nextMethodSimpleCheck() {
         assertThat(it.next(), is(1));
         assertThat(it.next(), is(2));
         assertThat(it.next(), is(3));
@@ -46,7 +46,7 @@ public class MatrixIteratorTest {
     }
 
     @Test
-    public void sequentialHasNextInvocationDoesntAffectRetrievalOrder() {
+    public void hasNextMethodDoesNotChangeIndexForNextMethod() {
         assertThat(it.hasNext(), is(true));
         assertThat(it.hasNext(), is(true));
         assertThat(it.next(), is(1));
@@ -58,7 +58,7 @@ public class MatrixIteratorTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void shouldThrowNoSuchElementException() {
+    public void nextMethodThrowNoSuchElementException() {
         it = new MatrixIterator(new int[][]{});
         it.next();
     }

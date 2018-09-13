@@ -16,20 +16,19 @@ public class MatrixIterator implements Iterator<Integer> {
 
     @Override
     public boolean hasNext() {
-        return j < value[i].length;
+        return i < value.length;
     }
 
     @Override
     public Integer next() {
+        if (!(hasNext())) {
+            throw new NoSuchElementException();
+        }
         int result;
-        try {
-            result = value[i][j++];
-            if (!(hasNext()) && i < value.length - 1) {
+        result = value[i][j++];
+        if (j == value[i].length) {
                 i++;
                 j = 0;
-            }
-        } catch (ArrayIndexOutOfBoundsException aob) {
-            throw new NoSuchElementException();
         }
         return result;
     }
