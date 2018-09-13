@@ -31,11 +31,9 @@ public class SimpleArray<T> implements Iterable<T> {
         if (index < 0 && index >= this.values.length) {
             throw new ArrayIndexOutOfBoundsException();
         }
-        for (int i = index; i < this.position - 1; i++) {
-            this.values[i] = this.values[i + 1];
-        }
-        this.values[position - 1] = null;
-        position--;
+        System.arraycopy(this.values, index + 1, this.values, index, this.values.length - 1 - index);
+        this.values[this.position - 1] = null;
+        this.position--;
     }
 
     public T get(int index) {

@@ -45,7 +45,7 @@ public class SimpleArrayTest {
     }
 
     @Test
-    public void whenDeleteObjectByZeroIndex() {
+    public void whenDeleteObjectByFirstIndex() {
         simpleArray.delete(0);
         Assert.assertThat(simpleArray.get(0), Is.is(2));
         Assert.assertThat(simpleArray.get(3), Is.is(5));
