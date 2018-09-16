@@ -3,11 +3,15 @@ package ru.job4j.generic;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
+/**
+ * @author Vyacheslav Khan (mailto: beckkhan@mail.ru)
+ * @version 1.0
+ * @since 16.09.2018
+ */
 public class SimpleArray<T> implements Iterable<T> {
 
     private Object[] values;
     private int position = 0;
-
 
     public SimpleArray(int size) {
         this.values = new Object[size];
@@ -42,6 +46,19 @@ public class SimpleArray<T> implements Iterable<T> {
             throw new ArrayIndexOutOfBoundsException();
         }
         result = (T) this.values[index];
+        return result;
+    }
+
+    public int getIndex(T model) {
+        int result = -1;
+        if (model != null) {
+            for (int i = 0; i < values.length; i++) {
+                if (values[i] == model) {
+                    result = i;
+                    break;
+                }
+            }
+        }
         return result;
     }
 
