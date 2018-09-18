@@ -18,21 +18,21 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void add(T model) {
-        if (!(position < values.length) && position < 0) {
+        /*if (!(position < values.length) && position < 0) {
             throw new ArrayIndexOutOfBoundsException();
-        }
+        }*/
         this.values[position++] = model;
     }
 
     public void set(int index, T model) {
-        if (index < 0 && index >= this.position) {
+        if (index < 0 || index >= this.position) {
             throw new ArrayIndexOutOfBoundsException();
         }
         this.values[index] = model;
     }
 
     public void delete(int index) {
-        if (index < 0 && index >= this.values.length) {
+        if (index < 0 || index >= this.values.length) {
             throw new ArrayIndexOutOfBoundsException();
         }
         System.arraycopy(this.values, index + 1, this.values, index, this.values.length - 1 - index);

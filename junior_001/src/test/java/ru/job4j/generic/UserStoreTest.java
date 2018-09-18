@@ -9,7 +9,7 @@ public class UserStoreTest {
     @Test
     public void whenCreateDatabase() {
         SimpleArray<User> database = new SimpleArray<>(15);
-        UserStore<User> users = new UserStore<User>(database);
+        UserStore users = new UserStore(database);
         User user = new User("IVAN");
         users.add(user);
         User result = users.findById("IVAN");
@@ -18,7 +18,7 @@ public class UserStoreTest {
     @Test
     public void whenTryToReplace() {
         SimpleArray<User> database = new SimpleArray<>(15);
-        UserStore<User> users = new UserStore<User>(database);
+        UserStore users = new UserStore(database);
         User first = new User("Fdksi");
         User second = new User("Sasdo");
         User third = new User("Asdwq");
@@ -35,7 +35,7 @@ public class UserStoreTest {
     @Test
     public void whenDeleteUser() {
         SimpleArray<User> database = new SimpleArray<>(15);
-        UserStore<User> users = new UserStore<User>(database);
+        UserStore users = new UserStore(database);
         User first = new User("Fdksi");
         User second = new User("Sasdo");
         User third = new User("Asdwq");
