@@ -88,9 +88,6 @@ public class DynamicContainer<E> implements Iterable<E> {
 
             @Override
             public E next() {
-                if (expectedModCount != modCount) {
-                    throw new ConcurrentModificationException();
-                }
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
