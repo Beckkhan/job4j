@@ -15,13 +15,17 @@ public class DynamicList<E> implements Iterable<E> {
     private int position = 0;
     private int modCount = 0;
 
-    public void add(E value) {
+    public void checkSize() {
         if (position == container.length) {
             int newsize = 2 * container.length;
             Object[] newContainer = new Object[newsize];
             System.arraycopy(container, 0, newContainer, 0, container.length);
             container = newContainer;
         }
+    }
+
+    public void add(E value) {
+        checkSize();
         container[position++] = value;
         modCount++;
     }
