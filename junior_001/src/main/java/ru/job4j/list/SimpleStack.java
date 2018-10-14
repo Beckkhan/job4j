@@ -2,7 +2,7 @@ package ru.job4j.list;
 
 /**
  * @author Vyacheslav Khan (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 14.10.2018
  */
 
@@ -21,5 +21,12 @@ public class SimpleStack<E> {
      */
     public E poll() {
         return list.delete();
+    }
+
+    /**
+     * Метод проверяет заполненность контейнера.
+     */
+    public boolean isEmpty() {
+        return list.getSize() == 0;
     }
 }
