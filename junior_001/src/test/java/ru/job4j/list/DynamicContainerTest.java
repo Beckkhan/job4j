@@ -10,8 +10,8 @@ import static org.junit.Assert.*;
 
 /**
  * @author Vyacheslav Khan (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 17.09.2018
+ * @version 2.0
+ * @since 14.10.2018
  */
 public class DynamicContainerTest {
     DynamicContainer<Integer> values = new DynamicContainer<>();

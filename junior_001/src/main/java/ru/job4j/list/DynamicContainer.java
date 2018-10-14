@@ -6,8 +6,8 @@ import java.util.NoSuchElementException;
 
 /**
  * @author Vyacheslav Khan (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 17.09.2018
+ * @version 2.0
+ * @since 14.10.2018
  */
 public class DynamicContainer<E> implements Iterable<E> {
 
@@ -20,8 +20,8 @@ public class DynamicContainer<E> implements Iterable<E> {
      */
     public void add(E data) {
         Node<E> newLink = new Node<>(data);
-        newLink.next = this.first.next;
-        this.first.next = newLink;
+        newLink.next = this.first;
+        this.first = newLink;
         this.position++;
         this.modCount++;
     }
@@ -44,7 +44,7 @@ public class DynamicContainer<E> implements Iterable<E> {
             throw new ArrayIndexOutOfBoundsException();
         }
         Node<E> result = this.first;
-        for (int i = 0; i < index + 1; i++) {
+        for (int i = 0; i < index; i++) {
             result = result.next;
         }
         return result.data;
@@ -91,7 +91,7 @@ public class DynamicContainer<E> implements Iterable<E> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                E result = second.next.data;
+                E result = second.data;
                 second = second.next;
                 return result;
             }
