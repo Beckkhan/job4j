@@ -7,8 +7,8 @@ import static org.junit.Assert.*;
 
 /**
  * @author Vyacheslav Khan (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 14.10.2018
+ * @version 2.0
+ * @since 16.10.2018
  */
 public class SimpleQueueTest {
     private SimpleQueue<Integer> queue;
@@ -34,6 +34,6 @@ public class SimpleQueueTest {
         queue.poll();
         queue.push(4);
         queue.poll();
-        assertThat(queue.poll(), is(3));
+        assertThat(queue.poll(), is(2));
     }
 }

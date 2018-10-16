@@ -9,21 +9,15 @@ public class SimpleQueue<T> {
 
     private SimpleStack<T> source = new  SimpleStack<>();
     private SimpleStack<T> dest = new  SimpleStack<>();
-    private int index = 0;
 
     public T poll() {
-        if (dest.isEmpty()) {
-            while (!source.isEmpty()) {
+        while (!source.isEmpty()) {
                 dest.push(source.poll());
-            }
         }
-        T result = dest.poll();
-        index--;
-        return result;
+        return dest.poll();
     }
 
     public void push(T value) {
         source.push(value);
-        index++;
     }
 }
