@@ -2,8 +2,8 @@ package ru.job4j.list;
 
 /**
  * @author Vyacheslav Khan (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 14.10.2018
+ * @version 2.0
+ * @since 16.10.2018
  */
 public class SimpleQueue<T> {
 
@@ -17,11 +17,8 @@ public class SimpleQueue<T> {
                 dest.push(source.poll());
             }
         }
-        T result = null;
-        if (!dest.isEmpty()) {
-            result = dest.poll();
-            index--;
-        }
+        T result = dest.poll();
+        index--;
         return result;
     }
 
