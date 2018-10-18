@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  * @since 18.10.2018
  */
 public class UserTest {
-    Calendar birthday = new GregorianCalendar(2018,10,18);
+    Calendar birthday = new GregorianCalendar(2018, 10, 18);
     private User first = new User("Kolobok", 3, birthday);
     private User second = new User("Kolobok", 3, birthday);
 
@@ -26,6 +26,6 @@ public class UserTest {
         users.add(first);
         users.add(second);
         System.out.println(users);
-        assertThat(users.size(),is(1));
+        assertThat(users.size(), is(1));
     }
 }
