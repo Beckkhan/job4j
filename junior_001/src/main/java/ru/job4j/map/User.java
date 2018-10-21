@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * @author Vyacheslav Khan (mailto: beckkhan@mail.ru)
- * @version 4.0
+ * @version 5.0
  * @since 21.10.2018
  */
 public class User {
@@ -31,10 +31,10 @@ public class User {
         return birthday;
     }
 
-    /*@Override
+    @Override
     public int hashCode() {
         return Objects.hash(name, children, birthday);
-    }*/
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) {

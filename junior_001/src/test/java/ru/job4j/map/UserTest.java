@@ -9,7 +9,7 @@ import static org.junit.Assert.*;
 
 /**
  * @author Vyacheslav Khan (mailto: beckkhan@mail.ru)
- * @version 4.0
+ * @version 5.0
  * @since 21.10.2018
  */
 public class UserTest {
@@ -51,8 +51,8 @@ public class UserTest {
         users.put(second, 2);
         System.out.println(users);
         System.out.println(first.hashCode() + " " + second.hashCode());
-        assertThat(users.size(), is(2));
-        assertTrue(users.containsValue(1) && users.containsValue(2));
+        assertThat(users.size(), is(1));
+        assertTrue(!users.containsValue(1) && users.containsValue(2));
     }
 
     /**
@@ -86,6 +86,6 @@ public class UserTest {
         users.add(first);
         users.add(second);
         System.out.println(users);
-        assertThat(users.size(), is(2));
+        assertThat(users.size(), is(1));
     }
 }
