@@ -16,12 +16,6 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      * Счетчик изменений.
      */
     private int modCount;
-    /**
-     * Количество элементов в дереве.
-     * Инициализируется числом 1, т.к. при создании конструктором
-     * объека класса Tree мы сразу предусматриваем добавление корневого элемента.
-     */
-    private int volume = 1;
 
     public Tree(E value) {
         this.root = new Node<E>(value);
@@ -63,9 +57,25 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             Optional<Node<E>> parentNode = this.findBy(parent);
             if (parentNode.isPresent()) {
                 parentNode.get().add(new Node<>(child));
-                volume++;
                 modCount++;
                 result = true;
+            }
+        }
+        return result;
+    }
+
+    public boolean isBinary() {
+        boolean result = true;
+        Queue<Node<E>> data = new LinkedList<>();
+        data.offer(this.root);
+        while (!data.isEmpty()) {
+            Node<E> element = data.poll();
+            if (element != null && element.leaves().size() > 2) {
+                result = false;
+                break;
+            }
+            for (Node<E> child : element.leaves()) {
+                data.offer(child);
             }
         }
         return result;
