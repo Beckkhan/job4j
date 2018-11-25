@@ -13,7 +13,7 @@ public class Store {
         int id;
         String name;
 
-        public User( int id, String name ) {
+        public User(int id, String name) {
             this.id = id;
             this.name = name;
         }
@@ -47,12 +47,12 @@ public class Store {
 
     public Info diff(List<User> previous, List<User> current) {
         Info info = new Info();
-        if(current.isEmpty()) {
+        if (current.isEmpty()) {
             info.deleted = previous.size();
         } else {
             int position = 0;
-            for(User user : previous) {
-                if(current.get(position).id == user.id) {
+            for (User user : previous) {
+                if (current.get(position).id == user.id) {
                     if (!current.get(position).name.equals(user.name)) {
                         info.changed++;
                     }
