@@ -16,8 +16,8 @@ public class RectangleMove implements Runnable {
 
     @Override
     public void run() {
-        int deltaX = (int) (Math.random() * 17 - 6);
-        int deltaY = (int) (Math.random() * 17 - 6);;
+        int deltaX = (int) (Math.random() * 20 - 7);
+        int deltaY = (int) (Math.random() * 20 - 7);
         while (true) {
             this.rect.setX(this.rect.getX() + deltaX);
             this.rect.setY(this.rect.getY() + deltaY);
