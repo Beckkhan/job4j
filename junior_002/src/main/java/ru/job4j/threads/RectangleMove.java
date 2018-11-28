@@ -18,7 +18,7 @@ public class RectangleMove implements Runnable {
     public void run() {
         int deltaX = (int) (Math.random() * 20 - 7);
         int deltaY = (int) (Math.random() * 20 - 7);
-        while (true) {
+        while (!Thread.currentThread().isInterrupted()) {
             this.rect.setX(this.rect.getX() + deltaX);
             this.rect.setY(this.rect.getY() + deltaY);
             if (this.rect.getX() >= 300 || this.rect.getX() <= 0) {
@@ -30,7 +30,8 @@ public class RectangleMove implements Runnable {
             try {
                 Thread.sleep(50);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                Thread.currentThread().interrupt();
+                System.out.println("Вы завершили анимацию!");
             }
         }
     }
