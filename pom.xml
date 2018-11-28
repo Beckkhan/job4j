@@ -20,6 +20,7 @@
         <module>chess</module>
         <module>chapter_004</module>
         <module>junior_001</module>
+        <module>junior_002</module>
     </modules>
 	
 	<dependencies>
