@@ -12,6 +12,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      * Корневой элемент.
      */
     public final Node<E> root;
+
     /**
      * Счетчик изменений.
      */
@@ -53,13 +54,11 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public boolean add(E parent, E child) {
         boolean result = false;
-        if (!this.findBy(child).isPresent()) {
-            Optional<Node<E>> parentNode = this.findBy(parent);
-            if (parentNode.isPresent()) {
-                parentNode.get().add(new Node<>(child));
-                modCount++;
-                result = true;
-            }
+        Optional<Node<E>> parentNode = this.findBy(parent);
+        if (!this.findBy(child).isPresent() && parentNode.isPresent()) {
+            parentNode.get().add(new Node<>(child));
+            modCount++;
+            result = true;
         }
         return result;
     }
@@ -83,10 +82,14 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     @Override
     public Iterator<E> iterator() {
-        Queue<Node<E>> data = new LinkedList<>();
-        data.offer(this.root);
         return new Iterator<E>() {
-            private int expectedModCount = modCount;
+            private Queue<Node<E>> data = new LinkedList<>();
+            private int expectedModCount;
+
+            {
+                this.data.offer(root);
+                this.expectedModCount = modCount;
+            }
 
             @Override
             public boolean hasNext() {
