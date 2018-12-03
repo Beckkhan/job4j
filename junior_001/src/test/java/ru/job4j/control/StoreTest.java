@@ -11,8 +11,8 @@ import static org.junit.Assert.assertThat;
 
 /**
  * @author Vyacheslav Khan (beckkhan@mail.ru)
- * @version 1.0
- * @since 25.11.2018
+ * @version 2.0
+ * @since 03.11.2018
  */
 public class StoreTest {
     List<Store.User> previous;

@@ -1,11 +1,13 @@
 package ru.job4j.control;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Vyacheslav Khan (beckkhan@mail.ru)
- * @version 1.0
- * @since 25.11.2018
+ * @version 2.0
+ * @since 03.11.2018
  */
 public class Store {
 
@@ -47,22 +49,18 @@ public class Store {
 
     public Info diff(List<User> previous, List<User> current) {
         Info info = new Info();
-        if (current.isEmpty()) {
-            info.deleted = previous.size();
-        } else {
-            int position = 0;
-            for (User user : previous) {
-                if (current.get(position).id == user.id) {
-                    if (!current.get(position).name.equals(user.name)) {
-                        info.changed++;
-                    }
-                } else {
-                    info.deleted++;
-                }
-                position++;
-            }
-            info.added = current.size() - previous.size() + info.deleted;
+        Map<Integer, User> currentMap = new HashMap<>();
+        for (User user : current) {
+            currentMap.put(user.id, user);
         }
+        for (User user : previous) {
+            if (!currentMap.containsKey(user.id)) {
+                info.deleted++;
+        } else if (!currentMap.get(user.id).equals(user)) {
+                info.changed++;
+            }
+        }
+        info.added = current.size() - previous.size() + info.deleted;
         return info;
     }
 }
