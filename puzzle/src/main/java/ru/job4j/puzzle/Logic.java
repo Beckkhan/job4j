@@ -66,29 +66,20 @@ public class Logic {
 
     public boolean isWin() {
         int[][] table = this.convert();
-        boolean isRowLine = true;
-        boolean isColumnLine = true;
+        boolean result = false;
         for (int i = 0; i < size; i++) {
-            if (table[i][0] == 1) {
-                for (int j = 1; j < size; j++) {
-                    if (table[i][j - 1] != table[i][j]) {
-                        isRowLine = false;
-                        break;
-                    }
-                }
+            int checkRows = 1;
+            int checkColumns = 1;
+            for (int j = 0; j < size; j++) {
+                checkRows *= table[i][j];
+                checkColumns *= table[j][i];
+            }
+            if (checkRows == 1 || checkColumns == 1) {
+                result = true;
+                break;
             }
         }
-        for (int j = 0; j < size; j++) {
-            if (table[0][j] == 1) {
-                for (int i = 1; i < size; i++) {
-                    if (table[i - 1][j] != table[i][j]) {
-                        isColumnLine = false;
-                        break;
-                    }
-                }
-            }
-        }
-        return isRowLine || isColumnLine;
+        return result;
     }
 
     public int[][] convert() {
