@@ -6,8 +6,8 @@ import java.util.List;
 /**
  * Класс FunctionValues с методами для подсчета функций в диапазоне
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1
- * @since 05.09.2018
+ * @version 2
+ * @since 23.01.2019
  * */
 public class FunctionValues {
 
@@ -23,7 +23,7 @@ public class FunctionValues {
         return result;
     }
 
-    List<Double> linear(int start, int end, double k, double b) {
+    /*List<Double> linear(int start, int end, double k, double b) {
         return diapason(start, end, x -> x * k + b);
     }
 
@@ -31,11 +31,11 @@ public class FunctionValues {
         return diapason(start, end, x -> a * x * x + b * x + c);
     }
 
-    /**
+    *//**
      * В математике логарифм от числа по основанию равен результату деления
      * натурального логарифма от числа на натуральный логарифм от основания .
-     */
+     *//*
     List<Double> logarithmic(int start, int end, double a) {
         return diapason(start, end, x -> Math.exp(x) / Math.exp(a));
-    }
+    }*/
 }
