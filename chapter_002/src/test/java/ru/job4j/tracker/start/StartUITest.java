@@ -1,24 +1,34 @@
 package ru.job4j.tracker.start;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import ru.job4j.tracker.models.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.function.Consumer;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
 
+/**
+ * Тестирование StartUITest с применением функционального интерфейса Consumer.
+ * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
+ * @version 1
+ * @since 23.01.2019
+ **/
 public class StartUITest {
-    // получаем ссылку на стандартный вывод в консоль
-    PrintStream stdout = System.out;
     // создаем буфер для хранения вывода
-    ByteArrayOutputStream out = new ByteArrayOutputStream();
-    @Before
+    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private final Consumer<String> output = new Consumer<String>() {
+        // получаем ссылку на стандартный вывод в консоль
+        private final PrintStream stdout = new PrintStream(out);
+        @Override
+        public void accept(String s) {
+            stdout.println(s);
+        }
+    };
+    /*@Before
     public void loadOutput() {
         System.out.println("execute before method");
         // заменяем стандартный вывод на вывод в память для тестирования
@@ -29,12 +39,12 @@ public class StartUITest {
         // возвращаем обратно стандартный вывод в консоль
         System.setOut(this.stdout);
         System.out.println("execute after method");
-    }
+    }*/
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();     // создаём Tracker
         Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});   //создаём StubInput с последовательностью действий
-        new StartUI(input, tracker).init();     //   создаём StartUI и вызываем метод init()
+        new StartUI(input, tracker, output).init();     //   создаём StartUI и вызываем метод init()
         assertThat(tracker.getAll().get(0).getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
     }
 
@@ -47,7 +57,7 @@ public class StartUITest {
         //создаём StubInput с последовательностью действий
         Input input = new StubInput(new String[]{"2", item.getId(), "test name", "desc", "y"});
         // создаём StartUI и вызываем метод init()
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         // проверяем, что отредактированный элемент массива в трекере содержит имя, введённое при эмуляции.
         assertThat(tracker.findById(item.getId()).getName(), is("test name"));
     }
@@ -57,7 +67,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item());
         Input input = new StubInput(new String[]{"3", item.getId(), "y"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertNull(tracker.findById(item.getId()));
     }
 
@@ -71,7 +81,7 @@ public class StartUITest {
         tracker.add(two);
         tracker.add(three);
         Input input = new StubInput(new String[]{"1", "y"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -109,7 +119,7 @@ public class StartUITest {
         tracker.add(second);
         tracker.add(third);
         Input input = new StubInput(new String[]{"4", second.getId(), "y"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -144,7 +154,7 @@ public class StartUITest {
         tracker.add(two);
         tracker.add(three);
         Input input = new StubInput(new String[]{"5", three.getName(), "y"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(
                 new String(out.toByteArray()),
                 is(
@@ -174,7 +184,7 @@ public class StartUITest {
     public void whenAddItemWithStubInputThenTrackerAddItem() {
         Tracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "newtestname", "newtestdescription", "y"});
-        new StartUI(input, tracker).init();
+        new StartUI(input, tracker, output).init();
         assertThat(
                 new String(out.toByteArray()),
                 is(

@@ -1,33 +1,43 @@
 package ru.job4j.tracker.start;
 
+import java.util.function.Consumer;
+
+/**
+ * Класс StartUI с заменой вывода в консоль на Consumer.
+ * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
+ * @version 1
+ * @since 23.01.2019
+ **/
 public class StartUI {
 
-	private Input input;
-	private Tracker tracker;
-	
-	public StartUI(Input input, Tracker tracker) {
-		this.input = input;
-		this.tracker = tracker;
-	}
-	
-	public void init() {
-	    MenuTracker menu = new MenuTracker(this.input, tracker);
-		menu.fillActions();
-		
-		do {
-			menu.show();
-			menu.select(input.ask("Select:", menu.getActionsNum()));
-		}
-		while (!"y".equals(this.input.ask("Exit?(y):")));
-	}
-	
-	public static void main(String[] args) {
-        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker()).init();
+    private Input input;
+    private Tracker tracker;
+    private final Consumer<String> output;
+
+    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
+        this.input = input;
+        this.tracker = tracker;
+        this.output = output;
+    }
+
+    public void init() {
+        MenuTracker menu = new MenuTracker(this.input, this.tracker, output);
+        menu.fillActions();
+
+        do {
+            menu.show();
+            menu.select(input.ask("Select:", menu.getActionsNum()));
+        }
+        while (!"y".equals(this.input.ask("Exit?(y):")));
+    }
+
+    public static void main(String[] args) {
+        new StartUI(new ValidateInput(new ConsoleInput()), new Tracker(), System.out::println).init();
     }
 
 
 //	Ниже приведен код до использования внутренних классов	
-	/**
+    /**
      * Константа меню для добавления новой заявки.
      */
 //    private static final String ADD = "0";
@@ -57,22 +67,22 @@ public class StartUI {
      */
 //    private static final String FINDBYNAME = "5";
 
-	/**
+    /**
      * Константа для выхода из цикла.
      */
 //    private static final String EXIT = "6";
-	
-	/**
+
+    /**
      * Получение данных от пользователя.
      */
 //    private final Input input;
-	
-	/**
+
+    /**
      * Хранилище заявок.
      */
 //    private final Tracker tracker;
-	
-	/**
+
+    /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
      * @param tracker хранилище заявок.
@@ -81,10 +91,10 @@ public class StartUI {
 //        this.input = input;
 //        this.tracker = tracker;
 //    }
-	
-	/**
+
+    /**
      * Основой цикл программы.
-     */	
+     */
 //    public void init() {
 //        boolean exit = false;
 //        while (!exit) {
@@ -167,7 +177,7 @@ public class StartUI {
 //        System.out.println("Меню:\n0. Add new Item\n1. Show all items\n2. Edit item\n3. Delete item\n4. Find item by Id\n5. Find items by name\n6. Exit Program\nSelect");
 //    }
 //		
-	/**
+    /**
      * Запуск программы.
      * @param args
      */
