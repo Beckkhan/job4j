@@ -4,6 +4,11 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * @author Vyacheslav Khan (beckkhan@mail.ru)
+ * @version 2.0
+ * @since 26.08.2018
+ */
 public class PriorityQueueTest {
     @Test
     public void whenHigherPriority() {

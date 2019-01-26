@@ -1,9 +1,13 @@
 package ru.job4j.list;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Stream;
 
+/**
+ * @author Vyacheslav Khan (beckkhan@mail.ru)
+ * @version 2.0
+ * @since 27.08.2018
+ */
 public class ConvertList2Array {
 
     public int[][] toArray(List<Integer> list, int rows) {
@@ -24,12 +28,16 @@ public class ConvertList2Array {
 
     public List<Integer> convert(List<int[]> list) {
         List<Integer> result = new ArrayList<>();
+        list.stream().map(arraystream -> Arrays.stream(arraystream))
+                .forEach(stream -> stream.forEach(value -> result.add(value)));
+        return result;
+
+        /*List<Integer> result = new ArrayList<>();
         for (int[] mas : list) {
             for (int elem : mas) {
                 result.add(elem);
             }
         }
-        return result;
+        return result;*/
     }
-
 }

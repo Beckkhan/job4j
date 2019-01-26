@@ -1,13 +1,21 @@
 package ru.job4j.comparator;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
+/**
+ * @author Vyacheslav Khan (beckkhan@mail.ru)
+ * @version 2.0
+ * @since 02.09.2018
+ */
 public class SortUser {
 
     public Set<User> sort(List<User> users) {
-        Set<User> result = new TreeSet<>();
+        return users.stream().sorted(Comparator.comparingInt(User::getAge))
+                .collect(Collectors.toCollection(TreeSet::new));
+        /*Set<User> result = new TreeSet<>();
         result.addAll(users);
-        return result;
+        return result;*/
     }
 
     static class NameLenghtCompare implements Comparator<User> {
@@ -18,8 +26,9 @@ public class SortUser {
     }
 
     public List<User> sortNameLength(List<User> users, NameLenghtCompare nameLenghtComparator) {
-        Collections.sort(users, nameLenghtComparator);
-        return users;
+        return users.stream().sorted(nameLenghtComparator).collect(Collectors.toList());
+        /*Collections.sort(users, nameLenghtComparator);
+        return users;*/
     }
 
     static class AllFieldsCompare implements Comparator<User> {
@@ -34,7 +43,8 @@ public class SortUser {
     }
 
     public List<User> sortByAllFields(List<User> users, AllFieldsCompare allFieldsComparator) {
-        Collections.sort(users, allFieldsComparator);
-        return users;
+        return users.stream().sorted(allFieldsComparator).collect(Collectors.toList());
+        /*Collections.sort(users, allFieldsComparator);
+        return users;*/
     }
 }
