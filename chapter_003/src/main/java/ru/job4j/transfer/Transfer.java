@@ -1,14 +1,12 @@
 package ru.job4j.transfer;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Класс Transfer с методами для провеения операций
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1
+ * @version 2
  * @since 04.09.2018
  * */
 public class Transfer {
@@ -41,35 +39,47 @@ public class Transfer {
      * Добавление счета для пользователя
      */
     public void addAccountToUser(String passport, Account account) {
-        if (passport != null && account != null) {
+        this.database.get(this.database.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findFirst().orElse(null)).add(account);
+
+        /*if (passport != null && account != null) {
             for (User user : database.keySet()) {
                 if (user.getPassport().equals(passport)) {
                     this.database.get(user).add(account);
                     break;
                 }
             }
-        }
+        }*/
     }
 
     /**
      * Удаление счета пользователя
      */
     public void deleteAccountFromUser(String passport, Account account) {
-        if (passport != null & account != null) {
+        this.database.get(this.database.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findFirst().orElse(null)).remove(account);
+
+        /*if (passport != null & account != null) {
             for (User user : database.keySet()) {
                 if (user.getPassport().equals(passport)) {
                     this.database.get(user).remove(account);
                     break;
                 }
             }
-        }
+        }*/
     }
 
     /**
      * Получение списка счетов пользователя
      */
     public List<Account> getUserAccounts(String passport) {
-        List<Account> userAccounts = null;
+        User targetuser = this.database.keySet().stream()
+                .filter(user -> user.getPassport().equals(passport))
+                .findFirst().orElse(null);
+        return this.database.get(targetuser);
+        /*List<Account> userAccounts = null;
         if (passport != null) {
             for (User user : database.keySet()) {
                 if (user.getPassport().equals(passport)) {
@@ -78,7 +88,7 @@ public class Transfer {
                 }
             }
         }
-        return userAccounts;
+        return userAccounts;*/
     }
 
     /**
@@ -104,7 +114,14 @@ public class Transfer {
      * Метод поиска счета по данным паспорта пользователя и реквизитам счета
      */
     private Account findAccountByPassportAndRequisites(String srcPassport, String srcRequisite) {
-        Account result = null;
+        Account account = null;
+        if (this.getUserAccounts(srcPassport) != null) {
+            account = this.getUserAccounts(srcPassport).stream()
+                    .filter(acc -> acc.getRequisites().equals(srcRequisite))
+                    .findFirst().orElse(null);
+        }
+        return account;
+        /*Account result = null;
         List<Account> userAccounts = this.getUserAccounts(srcPassport);
         if (srcPassport != null && srcRequisite != null && userAccounts != null) {
             for (Account account : userAccounts) {
@@ -114,6 +131,6 @@ public class Transfer {
                 }
             }
         }
-        return result;
+        return result;*/
     }
 }
