@@ -2,7 +2,13 @@ package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.*;
 import java.util.*;
+import java.util.stream.Collectors;
 
+/**
+ * @author Vyacheslav Khan (beckkhan@mail.ru)
+ * @version 9.0
+ * @since 16.05.2018
+ */
 public class Tracker {
 
     /** items - список заявок, теперь используем ArrayList вместо обычного массива */
@@ -16,14 +22,16 @@ public class Tracker {
     }
 
     public Item findById(String id) {
-        Item result = null;
+        return this.items.stream().filter(item -> item.getId().equals(id))
+                .findFirst().orElse(null);
+        /*Item result = null;
         for (Item item : this.items) {
             if (item != null && item.getId().equals(id)) {
                 result = item;
                 break;
             }
         }
-        return result;
+        return result;*/
     }
 
     public void replace(String id, Item item) {
@@ -48,7 +56,9 @@ public class Tracker {
     }
 
     public List<Item> findByName(String key) {
-        ListIterator<Item> iterator = this.items.listIterator();
+        return this.items.stream().filter(item -> item.getName().equals(key))
+                .collect(Collectors.toList());
+        /*ListIterator<Item> iterator = this.items.listIterator();
         ArrayList<Item> result = new ArrayList<>();
         Item item;
         while (iterator.hasNext()) {
@@ -57,7 +67,7 @@ public class Tracker {
                 result.add(item);
             }
         }
-        return result;
+        return result;*/
     }
 
     private String generateId() {
