@@ -10,12 +10,12 @@ import ru.job4j.chess.exception.OccupiedWayException;
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.black.*;
 import ru.job4j.chess.figures.white.*;
-/**
- * @author Khan Vyacheslav (beckkhan@mail.ru)
- * @version $Id$
- * @since 12/08/2018
- */
 
+/**
+ * @author Vyacheslav Khan (mailto: beckkhan@mail.ru)
+ * @version 4.0
+ * @since 29.01.2019
+ */
 public class LogicTest {
     @Test
     public void whenPawnBlackCanMove()  {
