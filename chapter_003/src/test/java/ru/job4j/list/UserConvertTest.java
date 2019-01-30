@@ -5,25 +5,29 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.assertTrue;
 
+/**
+ * @author Vyacheslav Khan (beckkhan@mail.ru)
+ * @version 2.0
+ * @since 30.01.2019
+ */
 public class UserConvertTest {
     @Test
     public void whenConvertListUserToMap() {
         UserConvert uc = new UserConvert();
-        List<User> list = new ArrayList<>();
         User first = new User(17, "Feofantii", "Bludogorsk");
         User second = new User(25, "Prokop", "Yablonevka");
         User third = new User(39, "Dobrynya", "Zanikitovka");
-        list.add(first);
-        list.add(second);
-        list.add(third);
+        List<User> list = List.of(first, second, third);
         HashMap<Integer, User> result = uc.process(list);
-        HashMap<Integer, User> expect = new HashMap<>();
-        expect.put(17, first);
-        expect.put(25, second);
-        expect.put(39, third);
+        Map<Integer, User> expect = Map.of(
+                first.getId(), first,
+                second.getId(), second,
+                third.getId(), third
+        );
         assertTrue(result.equals(expect));
     }
 }

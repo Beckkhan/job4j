@@ -3,10 +3,11 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import java.util.*;
+
 /**
- * @author Vyacheslav Khan (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 29.08.2018
+ * @author Vyacheslav Khan (beckkhan@mail.ru)
+ * @version 3.0
+ * @since 30.01.2019
  */
 public class SortUserTest {
     SortUser sortUser = new SortUser();

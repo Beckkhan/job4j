@@ -10,12 +10,17 @@ import java.util.List;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+/**
+ * @author Vyacheslav Khan (beckkhan@mail.ru)
+ * @version 2.0
+ * @since 30.01.2019
+ */
 public class ConvertList2ArrayTest {
     @Test
     public void when7ElementsThen9() {
         ConvertList2Array list = new ConvertList2Array();
         int[][] result = list.toArray(
-                Arrays.asList(1, 2, 3, 4, 5, 6, 7),
+                List.of(1, 2, 3, 4, 5, 6, 7),
                 3
         );
         int[][] expect = {
@@ -29,7 +34,7 @@ public class ConvertList2ArrayTest {
     public void when9ElementsThen9() {
         ConvertList2Array list = new ConvertList2Array();
         int[][] result = list.toArray(
-                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9),
+                List.of(1, 2, 3, 4, 5, 6, 7, 8, 9),
                 3
         );
         int[][] expect = {
@@ -43,7 +48,7 @@ public class ConvertList2ArrayTest {
     public void when11ElementsThen12() {
         ConvertList2Array list = new ConvertList2Array();
         int[][] result = list.toArray(
-                Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
+                List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11),
                 4
         );
         int[][] expect = {
@@ -62,8 +67,7 @@ public class ConvertList2ArrayTest {
         list.add(new int[]{4, 9});
         list.add(new int[]{1, 7, 5, 3});
         List<Integer> result = convertList.convert(list);
-        List<Integer> expect = new ArrayList<>();
-        Collections.addAll(expect, 2, 8, 9, 4, 9, 1, 7, 5, 3);
+        List<Integer> expect = List.of(2, 8, 9, 4, 9, 1, 7, 5, 3);
         assertThat(result, is(expect));
     }
 }
