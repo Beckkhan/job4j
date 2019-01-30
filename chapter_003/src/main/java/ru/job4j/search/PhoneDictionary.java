@@ -6,8 +6,8 @@ import java.util.stream.Collectors;
 
 /**
  * @author Vyacheslav Khan (beckkhan@mail.ru)
- * @version 4.0
- * @since 25.08.2018
+ * @version 5.0
+ * @since 30.01.2019
  */
 public class PhoneDictionary {
     private List<Person> persons = new ArrayList<Person>();
@@ -22,7 +22,7 @@ public class PhoneDictionary {
      * @return Список подощедщих пользователей.
      */
     public List<Person> find(String key) {
-        List<Person> result = persons.stream().filter(
+        var result = persons.stream().filter(
                 person -> person.getName().contains(key)
         ).collect(Collectors.toList());
         return result;

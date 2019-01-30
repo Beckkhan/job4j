@@ -5,8 +5,8 @@ import java.util.stream.Stream;
 
 /**
  * @author Vyacheslav Khan (beckkhan@mail.ru)
- * @version 4.0
- * @since 26.08.2018
+ * @version 5.0
+ * @since 30.01.2019
  */
 public class PriorityQueue {
     private LinkedList<Task> tasks = new LinkedList<>();
@@ -21,7 +21,7 @@ public class PriorityQueue {
         if (tasks.isEmpty()) {
             tasks.add(task);
         }
-        int index = (int) this.tasks.stream().filter(
+        var index = (int) this.tasks.stream().filter(
                 position -> task.getPriority() > position.getPriority()
         ).count();
         this.tasks.add(index, task);
