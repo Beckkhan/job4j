@@ -9,6 +9,7 @@ import java.util.*;
  * @since 03.02.2019
  */
 public class FileScanner {
+
     private LinkedList<File> result = new LinkedList<>();
 
     public List<File> files(String parent, List<String> exts) {
