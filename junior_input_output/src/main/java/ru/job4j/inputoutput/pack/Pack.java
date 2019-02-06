@@ -12,8 +12,8 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 05.02.2019
+ * @version 2.0
+ * @since 06.02.2019
  */
 public class Pack {
 
@@ -25,14 +25,16 @@ public class Pack {
         args[2] = input.ask("Введите имя для zip-файла, в который упаковываем проект:");
         Args parameters = new Args(args);
         Pack pack = new Pack();
+        pack.prepareList(parameters.directory(), parameters.exclude());
         pack.archive(parameters);
     }
 
     public void archive(Args parameters) {
         LinkedList<File> listToZip = this.prepareList(parameters.directory(), parameters.exclude());
-        try (ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(parameters.directory()))) {
+        try (ZipOutputStream zip = new ZipOutputStream(new FileOutputStream(parameters.directory() + "\\" + parameters.output()))) {
             for (File file : this.prepareList(parameters.directory(), parameters.exclude())) {
                 zip.putNextEntry(new ZipEntry(file.getAbsolutePath().substring(parameters.directory().length())));
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -52,11 +54,11 @@ public class Pack {
                     buffer.addLast(eachFile);
                 }
             } else {
-                    if (!file.getName().endsWith(exclude)) {
-                        result.add(file);
-                    }
+                if (!file.getName().endsWith(exclude)) {
+                    result.add(file);
                 }
             }
+        }
         return result;
     }
 }
