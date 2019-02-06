@@ -1,7 +1,6 @@
 package ru.job4j.inputoutput.pack;
 
 import ru.job4j.tracker.start.*;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,7 +11,7 @@ import java.util.zip.ZipOutputStream;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
+ * @version 3.0
  * @since 06.02.2019
  */
 public class Pack {

@@ -1,17 +1,20 @@
 package ru.job4j.inputoutput.pack;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import java.io.File;
 import static org.junit.Assert.assertTrue;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 06.02.2019
  */
 public class PackTest {
+
+    @Ignore
     @Test
-    public void whenFindFileThenTrue() {
+    public void whenZipFileExisted() {
         var args = new String[3];
         args[0] = "C:\\projects\\forpack";
         args[1] = ".txt";
