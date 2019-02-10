@@ -11,13 +11,13 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 08.02.2019
+ * @version 2.0
+ * @since 10.02.2019
  */
 public class ConsoleChatTest {
     @Test
     public void whenUserEndsDialog() {
-        String logDirectory = "c:\\projects\\job4j\\junior_input_output\\src\\main\\java\\ru\\job4j\\inputoutput\\consolechat\\log.txt";
+        String logDirectory = System.getProperty("user.dir") + "\\src\\main\\java\\ru\\job4j\\inputoutput\\consolechat\\log.txt";
         ArrayList<String> logPhrases = new ArrayList<>();
         try (FileInputStream finpstrTest = new FileInputStream(logDirectory);
              InputStreamReader inpstrTest = new InputStreamReader(finpstrTest, StandardCharsets.UTF_8);

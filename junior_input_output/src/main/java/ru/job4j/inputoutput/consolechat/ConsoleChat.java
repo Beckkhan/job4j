@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 08.02.2019
+ * @version 2.0
+ * @since 10.02.2019
  */
 public class ConsoleChat {
 
@@ -26,7 +26,7 @@ public class ConsoleChat {
         stringBuilder.append("Для паузы наберите stop. Для возобновления диалога наберите go on. Для выхода - end.\n");
         stringBuilder.append("Начнем диалог.\n");
         System.out.println(stringBuilder);
-        String stringLog = "c:\\projects\\job4j\\junior_input_output\\src\\main\\java\\ru\\job4j\\inputoutput\\consolechat\\log.txt";
+        String stringLog = System.getProperty("user.dir") + "\\src\\main\\java\\ru\\job4j\\inputoutput\\consolechat\\log.txt";
         try (FileWriter fr = new FileWriter(new File(stringLog));
                 BufferedWriter br = new BufferedWriter(fr);
              Scanner scanner = new Scanner(System.in)) {
