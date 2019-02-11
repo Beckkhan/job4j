@@ -1,23 +1,22 @@
 package ru.job4j.inputoutput.consolechat;
 
 import org.junit.Test;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import static org.junit.Assert.assertTrue;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
+ * @version 4.0
  * @since 11.02.2019
  */
 public class ConsoleChatTest {
     @Test
     public void whenUserEndsDialog() {
-        String logDirectory = System.getProperty("java.io.tmpdir") + "consolechat\\log.txt";
+        String logDirectory = System.getProperty("java.io.tmpdir") + File.separator + "consolechat\\log.txt";
+        System.out.println(logDirectory);
         ArrayList<String> logPhrases = new ArrayList<>();
         try (FileInputStream finpstrTest = new FileInputStream(logDirectory);
              InputStreamReader inpstrTest = new InputStreamReader(finpstrTest, StandardCharsets.UTF_8);
