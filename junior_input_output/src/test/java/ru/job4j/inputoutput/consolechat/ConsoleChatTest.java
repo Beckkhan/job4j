@@ -15,7 +15,7 @@ import static org.junit.Assert.assertTrue;
 public class ConsoleChatTest {
     @Test
     public void whenUserEndsDialog() {
-        String logDirectory = System.getProperty("java.io.tmpdir") + File.separator + "consolechat\\log.txt";
+        String logDirectory = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "consolechat\\log.txt";
         System.out.println(logDirectory);
         ArrayList<String> logPhrases = new ArrayList<>();
         try (FileInputStream finpstrTest = new FileInputStream(logDirectory);

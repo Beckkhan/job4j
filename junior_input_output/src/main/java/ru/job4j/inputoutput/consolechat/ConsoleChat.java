@@ -26,7 +26,7 @@ public class ConsoleChat {
         stringBuilder.append("Для паузы наберите stop. Для возобновления диалога наберите go on. Для выхода - end.\n");
         stringBuilder.append("Начнем диалог.\n");
         System.out.println(stringBuilder);
-        String stringLog = System.getProperty("java.io.tmpdir") + File.separator + "consolechat\\log.txt";
+        String stringLog = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "consolechat\\log.txt";
         try (FileWriter fr = new FileWriter(new File(stringLog));
                 BufferedWriter br = new BufferedWriter(fr);
              Scanner scanner = new Scanner(System.in)) {
@@ -69,7 +69,7 @@ public class ConsoleChat {
     }
 
     public String getPhrase() {
-        String phrasesDirectory = "c:\\projects\\job4j\\junior_input_output\\src\\main\\java\\ru\\job4j\\inputoutput\\consolechat\\phrases.txt";
+        String phrasesDirectory = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "consolechat\\phrases.txt";
         ArrayList<String> phrases = new ArrayList<>();
         try (FileInputStream fins = new FileInputStream(phrasesDirectory);
              InputStreamReader inputStreamReader = new InputStreamReader(fins);
