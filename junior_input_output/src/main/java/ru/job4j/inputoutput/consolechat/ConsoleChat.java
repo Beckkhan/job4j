@@ -15,7 +15,6 @@ public class ConsoleChat {
 
     public static void main(String[] args) {
         ConsoleChat consoleChat = new ConsoleChat();
-        //System.out.println(consoleChat.getPhrase());
         consoleChat.startChat();
     }
 
@@ -69,7 +68,7 @@ public class ConsoleChat {
     }
 
     public String getPhrase() {
-        String phrasesDirectory = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "consolechat\\phrases.txt";
+        String phrasesDirectory = ConsoleChat.class.getClassLoader().getResource("phrases.txt").getPath();
         ArrayList<String> phrases = new ArrayList<>();
         try (FileInputStream fins = new FileInputStream(phrasesDirectory);
              InputStreamReader inputStreamReader = new InputStreamReader(fins);

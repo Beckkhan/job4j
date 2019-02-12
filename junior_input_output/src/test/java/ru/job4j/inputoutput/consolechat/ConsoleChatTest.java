@@ -16,7 +16,6 @@ public class ConsoleChatTest {
     @Test
     public void whenUserEndsDialog() {
         String logDirectory = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "consolechat\\log.txt";
-        System.out.println(logDirectory);
         ArrayList<String> logPhrases = new ArrayList<>();
         try (FileInputStream finpstrTest = new FileInputStream(logDirectory);
              InputStreamReader inpstrTest = new InputStreamReader(finpstrTest, StandardCharsets.UTF_8);
