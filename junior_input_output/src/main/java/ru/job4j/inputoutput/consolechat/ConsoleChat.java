@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 4.0
- * @since 11.02.2019
+ * @version 7.0
+ * @since 12.02.2019
  */
 public class ConsoleChat {
 
