@@ -1,8 +1,0 @@
-Fri Feb 08 20:56:40 MSK 2019 Bot: Чат запущен!
-Fri Feb 08 20:56:49 MSK 2019 User: privet
-Fri Feb 08 20:56:49 MSK 2019 Bot: Откажитесь от нецензурных выражений и слов-паразитов. В общем, следите за своей речью. 
-Fri Feb 08 20:56:51 MSK 2019 User: stop
-Fri Feb 08 20:56:54 MSK 2019 User: go on
-Fri Feb 08 20:56:54 MSK 2019 Bot: Ходите прямо. Следите за осанкой. 
-Fri Feb 08 20:56:56 MSK 2019 User: end
-Fri Feb 08 20:56:56 MSK 2019 Bot: До свидания!
