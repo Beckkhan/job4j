@@ -9,18 +9,22 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 7.0
- * @since 12.02.2019
+ * @version 8.0
+ * @since 16.02.2019
  */
 public class ConsoleChatTest {
+
     @Test
-    public void whenUserEndsDialog() {
-        String logDirectory = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "consolechat\\log.txt";
+    public void whenCheckConsoleChat() {
+        String stringLog = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "consolechat\\log.txt";
+        String[] userInputSimulate = {"privet", "stop", "so what", "go on", "end"};
+        PreparedInput preparedInput = new PreparedInput(userInputSimulate);
+        ConsoleChat consoleChat = new ConsoleChat(preparedInput, stringLog);
+        consoleChat.startChat();
         ArrayList<String> logPhrases = new ArrayList<>();
-        try (FileInputStream finpstrTest = new FileInputStream(logDirectory);
+        try (FileInputStream finpstrTest = new FileInputStream(stringLog);
              InputStreamReader inpstrTest = new InputStreamReader(finpstrTest, StandardCharsets.UTF_8);
              BufferedReader readerTest = new BufferedReader(inpstrTest);) {
-
             String line;
             while ((line = readerTest.readLine()) != null) {
                 logPhrases.add(line);

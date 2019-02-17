@@ -1,20 +1,29 @@
 package ru.job4j.inputoutput.consolechat;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Scanner;
+import java.util.*;
+import java.util.function.Function;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 7.0
- * @since 12.02.2019
+ * @version 9.0
+ * @since 16.02.2019
  */
 public class ConsoleChat {
+    private String stringLog;
+    private String phrasesDirectory;
+    private Input input;
+
+    public ConsoleChat(Input input, String stringLog) {
+        this.stringLog = stringLog;
+        this.phrasesDirectory = ConsoleChat.class.getClassLoader().getResource("phrases.txt").getPath();
+        this.input = input;
+    }
 
     public static void main(String[] args) {
-        ConsoleChat consoleChat = new ConsoleChat();
+        Input input = new UserInput();
+        String stringLog = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "consolechat\\log.txt";
+        ConsoleChat consoleChat = new ConsoleChat(input, stringLog);
         consoleChat.startChat();
     }
 
@@ -25,63 +34,20 @@ public class ConsoleChat {
         stringBuilder.append("Для паузы наберите stop. Для возобновления диалога наберите go on. Для выхода - end.\n");
         stringBuilder.append("Начнем диалог.\n");
         System.out.println(stringBuilder);
-        String stringLog = System.getProperty("java.io.tmpdir") + System.getProperty("file.separator") + "consolechat\\log.txt";
         try (FileWriter fr = new FileWriter(new File(stringLog));
-                BufferedWriter br = new BufferedWriter(fr);
-             Scanner scanner = new Scanner(System.in)) {
+             BufferedWriter br = new BufferedWriter(fr);) {
+            Dispatcher dispatcher = new Dispatcher(br, phrasesDirectory, this.input).init();
             boolean userWantsCommunicate = true;
-            String userText;
-            String botAnswer;
             br.write(new Date() + " Bot: " + "Чат запущен!" + System.lineSeparator());
-            boolean getBackDialogue = true;
             while (userWantsCommunicate) {
-                userText = scanner.nextLine();
+                String userText = input.ask("");
                 br.write(new Date() + " User: " + userText + System.lineSeparator());
-                if (userText.contains("end")) {
-                    getBackDialogue = false;
-                    userWantsCommunicate = false;
-                    String goodBye = "До свидания!";
-                    br.write(new Date() + " Bot: " + goodBye);
-                    System.out.println(goodBye);
-                    break;
-                }
-                if (userText.contains("stop")) {
-                    getBackDialogue = false;
-                }
-                if (getBackDialogue) {
-                    botAnswer = this.getPhrase();
-                    System.out.println(botAnswer);
-                    br.write(new Date() + " Bot: " + botAnswer + System.lineSeparator());
-                }
-                if (userText.contains("go on")) {
-                    getBackDialogue = true;
-                    botAnswer = this.getPhrase();
-                    System.out.println(botAnswer);
-                    br.write(new Date() + " Bot: " + botAnswer + System.lineSeparator());
-                }
+                userWantsCommunicate = dispatcher.checkUserPhrase(userText);
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public String getPhrase() {
-        String phrasesDirectory = ConsoleChat.class.getClassLoader().getResource("phrases.txt").getPath();
-        ArrayList<String> phrases = new ArrayList<>();
-        try (FileInputStream fins = new FileInputStream(phrasesDirectory);
-             InputStreamReader inputStreamReader = new InputStreamReader(fins);
-             BufferedReader reader = new BufferedReader(inputStreamReader);) {
-
-            String line;
-            while ((line = reader.readLine()) != null) {
-                phrases.add(line);
-            }
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
-        String phrase = phrases.get((int) (Math.random() * phrases.size()));
-        return phrase;
     }
 }
