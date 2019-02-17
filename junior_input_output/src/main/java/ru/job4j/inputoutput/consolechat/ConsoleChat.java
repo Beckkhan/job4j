@@ -7,7 +7,7 @@ import java.util.function.Function;
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
  * @version 9.0
- * @since 16.02.2019
+ * @since 17.02.2019
  */
 public class ConsoleChat {
     private String stringLog;

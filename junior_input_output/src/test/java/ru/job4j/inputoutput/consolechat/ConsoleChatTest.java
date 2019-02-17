@@ -9,8 +9,8 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 8.0
- * @since 16.02.2019
+ * @version 9.0
+ * @since 17.02.2019
  */
 public class ConsoleChatTest {
 
