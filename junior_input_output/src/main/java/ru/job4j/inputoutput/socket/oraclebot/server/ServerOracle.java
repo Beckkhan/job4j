@@ -8,8 +8,8 @@ import java.net.*;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 18.02.2019
+ * @version 2.0
+ * @since 21.02.2019
  */
 public class ServerOracle {
     private final Socket socket;
@@ -39,7 +39,7 @@ public class ServerOracle {
 
     public static void main(String[] args) throws IOException {
         try (Socket socket = new ServerSocket(PORT).accept()) {
-            new ServerOracle(socket);
+            new ServerOracle(socket).start();
         }
     }
 }

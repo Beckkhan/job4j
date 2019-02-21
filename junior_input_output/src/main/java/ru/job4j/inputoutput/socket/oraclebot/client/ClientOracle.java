@@ -10,8 +10,8 @@ import java.util.Scanner;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 18.02.2019
+ * @version 2.0
+ * @since 21.02.2019
  */
 public class ClientOracle {
     private Socket socket;
@@ -45,7 +45,7 @@ public class ClientOracle {
 
     public static void main(String[] args) throws IOException {
         try (Socket socket = new Socket(InetAddress.getByName(IP), PORT)) {
-            new ClientOracle(socket);
+            new ClientOracle(socket).start();
         }
     }
 }
