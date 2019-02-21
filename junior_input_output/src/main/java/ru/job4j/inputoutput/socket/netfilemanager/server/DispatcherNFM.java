@@ -12,7 +12,7 @@ import java.util.function.*;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
+ * @version 4.0
  * @since 22.02.2019
  */
 public class DispatcherNFM {
@@ -64,6 +64,9 @@ public class DispatcherNFM {
         return getMainList -> {
             out.println("Cписок корневого каталога:");
             File parentList = new File(mainDirectory);
+            if (!parentList.exists()) {
+                parentList.mkdirs();
+            }
             checkpoint = parentList;
             this.presentDirectory(parentList);
             return true;
