@@ -120,7 +120,6 @@ public class ServerNetFileManagerTest {
 
     @Test
     public void whenAskCopyFileThenServerCopyFile() {
-        String pathOfCopiedFile = fileForCopy.toString();
         File newFile = new File(path + "Dir1\\fileForCopy.txt");
         try {
             fileForCopy.createNewFile();
@@ -163,11 +162,11 @@ public class ServerNetFileManagerTest {
 
                     )
             );
+            assertTrue(newFile.exists());
+            newFile.delete();
+            fileForCopy.delete();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        assertTrue(newFile.exists());
-        newFile.delete();
-        fileForCopy.delete();
     }
 }
