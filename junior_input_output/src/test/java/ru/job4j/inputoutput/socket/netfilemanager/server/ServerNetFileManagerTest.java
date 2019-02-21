@@ -17,8 +17,8 @@ import static org.mockito.Mockito.when;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 21.02.2019
+ * @version 3.0
+ * @since 22.02.2019
  */
 public class ServerNetFileManagerTest {
     private static final String LN = System.getProperty("line.separator");
@@ -29,6 +29,10 @@ public class ServerNetFileManagerTest {
     @Before
     public void setUp() throws IOException {
         path = System.getProperty("java.io.tmpdir") + "filenetmanager\\";
+        File main = new File(path);
+        if (!main.exists()) {
+            main.mkdirs();
+        }
 
         fileForCopy = new File(path + "fileForCopy.txt");
 
