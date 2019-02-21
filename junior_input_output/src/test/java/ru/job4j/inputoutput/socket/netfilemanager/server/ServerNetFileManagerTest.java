@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 21.02.2019
  */
 public class ServerNetFileManagerTest {
@@ -73,86 +73,95 @@ public class ServerNetFileManagerTest {
     }
 
     @Test
-    public void whenAskSomeCommandsThenShowActionsOfServer() throws IOException {
-        serverFileManagerTest(
-                Joiner.on(LN).join(
-                        "get main list",
-                        "go to",
-                        "1",
-                        "exit"
-                ),
-                Joiner.on(LN).join(
-                        "Для получения списка корневого каталога введите команду get main list",
-                        "Для перехода в подкаталог введите команду go to",
-                        "Для скачивания файла введите команду download",
-                        "Для загрузки файла введите команду upload",
-                        "Для завершения работы введите команду exit",
-                        "Ожидаю ввод команды...",
-                        "",
-                        "Cписок корневого каталога:",
-                        "0 " + path + "Dir1",
-                        "1 " + path + "Dir2",
-                        "2 " + path + "Dir3",
-                        "Ожидаю ввод команды...",
-                        "",
-                        "0 " + path + "Dir1",
-                        "1 " + path + "Dir2",
-                        "2 " + path + "Dir3",
-                        "Введите номер директории, в которую хотите перейти:",
-                        "",
-                        "0 " + path + "Dir2\\subDir2",
-                        "1 " + path + "Dir2\\subDir21",
-                        "Ожидаю ввод команды...",
-                        "",
-                        "Работа завершена",
-                        LN
-                )
-        );
+    public void whenAskSomeCommandsThenShowActionsOfServer() {
+        try {
+            serverFileManagerTest(
+                    Joiner.on(LN).join(
+                            "get main list",
+                            "go to",
+                            "1",
+                            "exit"
+                    ),
+                    Joiner.on(LN).join(
+                            "Для получения списка корневого каталога введите команду get main list",
+                            "Для перехода в подкаталог введите команду go to",
+                            "Для скачивания файла введите команду download",
+                            "Для загрузки файла введите команду upload",
+                            "Для завершения работы введите команду exit",
+                            "Ожидаю ввод команды...",
+                            "",
+                            "Cписок корневого каталога:",
+                            "0 " + path + "Dir1",
+                            "1 " + path + "Dir2",
+                            "2 " + path + "Dir3",
+                            "Ожидаю ввод команды...",
+                            "",
+                            "0 " + path + "Dir1",
+                            "1 " + path + "Dir2",
+                            "2 " + path + "Dir3",
+                            "Введите номер директории, в которую хотите перейти:",
+                            "",
+                            "0 " + path + "Dir2\\subDir2",
+                            "1 " + path + "Dir2\\subDir21",
+                            "Ожидаю ввод команды...",
+                            "",
+                            "Работа завершена",
+                            LN
+                    )
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
+
     @Test
-    public void whenAskCopyFileThenServerCopyFile() throws IOException {
-        fileForCopy.createNewFile();
+    public void whenAskCopyFileThenServerCopyFile() {
         String pathOfCopiedFile = fileForCopy.toString();
         File newFile = new File(path + "Dir1\\fileForCopy.txt");
-        assertFalse(newFile.exists());
-        serverFileManagerTest(
-                Joiner.on(LN).join(
-                        "get main list",
-                        "download",
-                        "3",
-                        path + "Dir1\\",
-                        "exit"
-                ),
-                Joiner.on(LN).join(
-                        "Для получения списка корневого каталога введите команду get main list",
-                        "Для перехода в подкаталог введите команду go to",
-                        "Для скачивания файла введите команду download",
-                        "Для загрузки файла введите команду upload",
-                        "Для завершения работы введите команду exit",
-                        "Ожидаю ввод команды...",
-                        "",
-                        "Cписок корневого каталога:",
-                        "0 " + path + "Dir1",
-                        "1 " + path + "Dir2",
-                        "2 " + path + "Dir3",
-                        "3 " + path + "fileForCopy.txt",
-                        "Ожидаю ввод команды...",
-                        "",
-                        "0 " + path + "Dir1",
-                        "1 " + path + "Dir2",
-                        "2 " + path + "Dir3",
-                        "3 " + path + "fileForCopy.txt",
-                        "Введите номер скачиваемого файла:",
-                        "Вами выбран файл: " + "fileForCopy.txt",
-                        "Введите путь для копирования файла в формате C:\\...\\...\\:",
-                        "Файл скопирован в указанную директорию",
-                        "Ожидаю ввод команды...",
-                        "",
-                        "Работа завершена",
-                        LN
+        try {
+            fileForCopy.createNewFile();
+            assertFalse(newFile.exists());
+            serverFileManagerTest(
+                    Joiner.on(LN).join(
+                            "get main list",
+                            "download",
+                            "3",
+                            path + "Dir1\\",
+                            "exit"
+                    ),
+                    Joiner.on(LN).join(
+                            "Для получения списка корневого каталога введите команду get main list",
+                            "Для перехода в подкаталог введите команду go to",
+                            "Для скачивания файла введите команду download",
+                            "Для загрузки файла введите команду upload",
+                            "Для завершения работы введите команду exit",
+                            "Ожидаю ввод команды...",
+                            "",
+                            "Cписок корневого каталога:",
+                            "0 " + path + "Dir1",
+                            "1 " + path + "Dir2",
+                            "2 " + path + "Dir3",
+                            "3 " + path + "fileForCopy.txt",
+                            "Ожидаю ввод команды...",
+                            "",
+                            "0 " + path + "Dir1",
+                            "1 " + path + "Dir2",
+                            "2 " + path + "Dir3",
+                            "3 " + path + "fileForCopy.txt",
+                            "Введите номер скачиваемого файла:",
+                            "Вами выбран файл: " + "fileForCopy.txt",
+                            "Введите путь для копирования файла в формате C:\\...\\...\\:",
+                            "Файл скопирован в указанную директорию",
+                            "Ожидаю ввод команды...",
+                            "",
+                            "Работа завершена",
+                            LN
 
-                )
-        );
+                    )
+            );
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         assertTrue(newFile.exists());
         newFile.delete();
         fileForCopy.delete();

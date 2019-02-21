@@ -12,7 +12,7 @@ import java.util.function.*;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 21.02.2019
  */
 public class DispatcherNFM {
@@ -105,11 +105,25 @@ public class DispatcherNFM {
 
     public boolean checkUserInputNumber(String userRequest) {
         boolean result = true;
-        if (userRequest == null) {
+        if (userRequest == null || userRequest.length() == 0) {
             result = false;
         }
-        if (Integer.valueOf(userRequest) >= checkpoint.listFiles().length
-                && Integer.valueOf(userRequest) < 0) {
+        int i = 0;
+        if (userRequest.charAt(0) == '-') {
+            if (userRequest.length() == 1) {
+                result = false;
+            }
+            i = 1;
+        }
+        char c;
+        for (; i < userRequest.length(); i++) {
+            c = userRequest.charAt(i);
+            if (!(c >= '0' && c <= '9')) {
+                result = false;
+            }
+        }
+        if (Integer.valueOf(userRequest) > (checkpoint.listFiles().length - 1)
+                || Integer.valueOf(userRequest) < 0) {
             result = false;
         }
         return result;
