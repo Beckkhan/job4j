@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 5.0
+ * @version 6.0
  * @since 22.02.2019
  */
 public class ServerNetFileManagerTest {
@@ -113,8 +113,6 @@ public class ServerNetFileManagerTest {
                             LN
                     )
             );
-        } catch (NumberFormatException nfe) {
-            nfe.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

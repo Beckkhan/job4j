@@ -12,8 +12,8 @@ import java.util.function.*;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 21.02.2019
+ * @version 3.0
+ * @since 22.02.2019
  */
 public class DispatcherNFM {
     private Map<String, Function<String, Boolean>> dispatch = new HashMap<>();
@@ -60,7 +60,7 @@ public class DispatcherNFM {
         };
     }
 
-    public Function<String, Boolean> getParentList() {
+    private Function<String, Boolean> getParentList() {
         return getMainList -> {
             out.println("Cписок корневого каталога:");
             File parentList = new File(mainDirectory);
@@ -70,7 +70,7 @@ public class DispatcherNFM {
         };
     }
 
-    public void presentDirectory(File currentFile) {
+    private void presentDirectory(File currentFile) {
         int number = 0;
         for (File file : currentFile.listFiles()) {
             out.println(number++ + " " + file.toString());
@@ -103,7 +103,7 @@ public class DispatcherNFM {
         };
     }
 
-    public boolean checkUserInputNumber(String userRequest) {
+    private boolean checkUserInputNumber(String userRequest) {
         boolean result = true;
         if (userRequest == null || userRequest.length() == 0) {
             result = false;
