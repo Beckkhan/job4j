@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 4.0
+ * @version 5.0
  * @since 22.02.2019
  */
 public class ServerNetFileManagerTest {
