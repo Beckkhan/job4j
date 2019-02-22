@@ -60,15 +60,12 @@ public class DispatcherNFM {
         };
     }
 
-    private Function<String, Boolean> getParentList() {
+    public Function<String, Boolean> getParentList() {
         return getMainList -> {
             out.println("Cписок корневого каталога:");
             File parentList = new File(mainDirectory);
-            if (!parentList.exists()) {
-                parentList.mkdirs();
-            }
             checkpoint = parentList;
-            this.presentDirectory(parentList);
+            this.presentDirectory(checkpoint);
             return true;
         };
     }
