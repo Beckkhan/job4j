@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 6.0
+ * @version 7.0
  * @since 22.02.2019
  */
 public class ServerNetFileManagerTest {
@@ -79,7 +79,7 @@ public class ServerNetFileManagerTest {
     @Test
     public void whenAskSomeCommandsThenShowActionsOfServer() {
         try {
-            serverFileManagerTest(
+            this.serverFileManagerTest(
                     Joiner.on(LN).join(
                             "get main list",
                             "go to",
@@ -124,7 +124,7 @@ public class ServerNetFileManagerTest {
         try {
             fileForCopy.createNewFile();
             assertFalse(newFile.exists());
-            serverFileManagerTest(
+            this.serverFileManagerTest(
                     Joiner.on(LN).join(
                             "get main list",
                             "download",

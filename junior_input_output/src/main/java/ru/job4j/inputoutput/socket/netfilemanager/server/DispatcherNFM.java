@@ -65,10 +65,7 @@ public class DispatcherNFM {
             out.println("Cписок корневого каталога:");
             File parentList = new File(mainDirectory);
             checkpoint = parentList;
-            int number = 0;
-            for (File file : parentList.listFiles()) {
-                out.println(number++ + " " + file.toString());
-            }
+            this.presentDirectory(parentList);
             return true;
         };
     }
