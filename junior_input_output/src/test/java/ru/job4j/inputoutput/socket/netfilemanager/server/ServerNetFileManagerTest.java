@@ -17,7 +17,7 @@ import static org.mockito.Mockito.when;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 7.0
+ * @version 8.0
  * @since 22.02.2019
  */
 public class ServerNetFileManagerTest {
@@ -79,6 +79,7 @@ public class ServerNetFileManagerTest {
     @Test
     public void whenAskSomeCommandsThenShowActionsOfServer() {
         try {
+            fileForCopy.createNewFile();
             this.serverFileManagerTest(
                     Joiner.on(LN).join(
                             "get main list",
@@ -98,11 +99,13 @@ public class ServerNetFileManagerTest {
                             "0 " + path + "Dir1",
                             "1 " + path + "Dir2",
                             "2 " + path + "Dir3",
+                            "3 " + path + "fileForCopy.txt",
                             "Ожидаю ввод команды...",
                             "",
                             "0 " + path + "Dir1",
                             "1 " + path + "Dir2",
                             "2 " + path + "Dir3",
+                            "3 " + path + "fileForCopy.txt",
                             "Введите номер директории, в которую хотите перейти:",
                             "",
                             "0 " + path + "Dir2\\subDir2",
@@ -113,6 +116,7 @@ public class ServerNetFileManagerTest {
                             LN
                     )
             );
+            fileForCopy.delete();
         } catch (IOException e) {
             e.printStackTrace();
         }

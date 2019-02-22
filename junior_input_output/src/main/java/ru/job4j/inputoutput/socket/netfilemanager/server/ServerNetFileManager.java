@@ -9,8 +9,8 @@ import java.util.Properties;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 21.02.2019
+ * @version 2.0
+ * @since 22.02.2019
  */
 public class ServerNetFileManager implements ServerNFM {
     private final Socket socket;
@@ -48,7 +48,7 @@ public class ServerNetFileManager implements ServerNFM {
     }
 
     public static void main(String[] args) {
-        try (FileInputStream in = new FileInputStream("junior_input_output\\src\\main\\resources\\app.properties")) {
+        try (FileInputStream in = new FileInputStream(ServerNetFileManager.class.getClassLoader().getResource("app.properties").getPath())) {
             Properties properties = new Properties();
             properties.load(in);
             ServerSocket serverSocket = new ServerSocket(Integer.valueOf(properties.getProperty("port")));

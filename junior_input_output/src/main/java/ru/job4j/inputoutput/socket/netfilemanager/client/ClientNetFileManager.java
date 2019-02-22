@@ -8,8 +8,8 @@ import java.util.Scanner;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 21.02.2019
+ * @version 2.0
+ * @since 22.02.2019
  */
 public class ClientNetFileManager implements ClientNFM {
     private Socket socket;
@@ -46,7 +46,7 @@ public class ClientNetFileManager implements ClientNFM {
     }
 
     public static void main(String[] args) {
-        try (FileInputStream in = new FileInputStream("junior_input_output\\src\\main\\resources\\app.properties")) {
+        try (FileInputStream in = new FileInputStream(ClientNetFileManager.class.getClassLoader().getResource("app.properties").getPath())) {
             Properties properties = new Properties();
             properties.load(in);
             Socket socket = new Socket(InetAddress.getByName(properties.getProperty("host")), Integer.valueOf(properties.getProperty("port")));

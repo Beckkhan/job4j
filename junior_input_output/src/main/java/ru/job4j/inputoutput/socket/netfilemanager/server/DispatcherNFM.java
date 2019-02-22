@@ -12,7 +12,7 @@ import java.util.function.*;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 6.0
+ * @version 7.0
  * @since 22.02.2019
  */
 public class DispatcherNFM {
