@@ -1,5 +1,7 @@
 package ru.job4j.inputoutput.searchprogram;
 
+import com.google.common.base.Joiner;
+
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -10,7 +12,7 @@ import java.util.Map;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 26.02.2019
  */
 public class SearchProgram {
@@ -39,12 +41,16 @@ public class SearchProgram {
     }
 
     public void getHelp() {
-        System.out.println(String.format("Аргументы для ввода:%s"
-                + "-d: директория, в которой будет происходить поиск в формате C:\\...\\...%s"
-                + "-n: маска, имя файла, либо регулярное выражение%s"
-                + "-m: поиск по маске, -f: поиск по имени файла, -r: поиск по регулярному выражению%s"
-                + "-o: файл, в который записывается результат поиска%s"
-                + "-help: справка по вводимым аргументам%s", LN, LN, LN, LN));
+        System.out.println(
+                Joiner.on(LN).join(
+                        "Аргументы для ввода:",
+                        "-d: директория, в которой будет происходить поиск в формате C:\\...\\...",
+                        "-n: маска, имя файла, либо регулярное выражение",
+                        "-m: поиск по маске, -f: поиск по имени файла, -r: поиск по регулярному выражению",
+                        "-o: файл, в который записывается результат поиска",
+                        "-help: справка по вводимым аргументам"
+                )
+        );
     }
 
     public void writeResult(List<File> files, String logFileName) {
