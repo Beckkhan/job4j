@@ -9,11 +9,11 @@ import static org.junit.Assert.*;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 26.02.2019
  */
 public class ValidatorTest {
-    private String logFileDir = System.getProperty("java.io.tmpdir") + "Search\\";
+    private String logFileDir = System.getProperty("java.io.tmpdir");
     private Map<String, String> parameters;
     private Validator validator;
 
