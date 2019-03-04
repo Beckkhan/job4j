@@ -1,21 +1,25 @@
 package ru.job4j.tracker.start;
 
 import org.junit.Test;
+import ru.job4j.tracker.ITracker;
 import ru.job4j.tracker.models.*;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.collection.IsArrayContainingInAnyOrder.arrayContainingInAnyOrder;
 import static org.junit.Assert.assertThat;
 
+/**
+ * @author Vyacheslav Khan (beckkhan@mail.ru)
+ * @version 2.0
+ * @since 03.03.2019
+ */
 public class TrackerTest {
 
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription", 123L);
         tracker.add(item);
         assertThat(tracker.getAll().get(0), is(item));
@@ -23,7 +27,7 @@ public class TrackerTest {
 
     @Test
     public void whenFindByName() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item one = new Item("one", "testOne", 1L);
         Item two = new Item("two", "testTwo", 2L);
         Item three = new Item("one", "testThree", 3L);
@@ -43,7 +47,7 @@ public class TrackerTest {
 
     @Test
     public void whenReplaceNameThenReturnNewName() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item previous = new Item("test1", "testDescription", 123L);
         // Добавляем заявку в трекер. Теперь в объект проинициализирован id.
         tracker.add(previous);
@@ -61,7 +65,7 @@ public class TrackerTest {
 
     @Test
     public void whenDeleteByItemId() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item first = new Item("first", "test1", 123L);
         Item second = new Item("second", "test2", 234L);
         Item third = new Item("third", "test3", 345L);

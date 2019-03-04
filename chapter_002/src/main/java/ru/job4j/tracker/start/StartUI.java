@@ -1,20 +1,22 @@
 package ru.job4j.tracker.start;
 
+import ru.job4j.tracker.ITracker;
+
 import java.util.function.Consumer;
 
 /**
  * Класс StartUI с заменой вывода в консоль на Consumer.
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1
- * @since 23.01.2019
+ * @version 3.0
+ * @since 03.03.2019
  **/
 public class StartUI {
 
     private Input input;
-    private Tracker tracker;
+    private final ITracker tracker;
     private final Consumer<String> output;
 
-    public StartUI(Input input, Tracker tracker, Consumer<String> output) {
+    public StartUI(Input input, ITracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
         this.output = output;

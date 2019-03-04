@@ -1,6 +1,7 @@
 package ru.job4j.tracker.start;
 
 import org.junit.Test;
+import ru.job4j.tracker.ITracker;
 import ru.job4j.tracker.models.*;
 
 import java.io.ByteArrayOutputStream;
@@ -14,8 +15,8 @@ import static org.junit.Assert.assertThat;
 /**
  * Тестирование StartUITest с применением функционального интерфейса Consumer.
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1
- * @since 23.01.2019
+ * @version 3.0
+ * @since 03.03.2019
  **/
 public class StartUITest {
     // создаем буфер для хранения вывода
@@ -56,7 +57,7 @@ public class StartUITest {
     }*/
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
-        Tracker tracker = new Tracker();     // создаём Tracker
+        ITracker tracker = new Tracker();     // создаём Tracker
         Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});   //создаём StubInput с последовательностью действий
         new StartUI(input, tracker, output).init();     //   создаём StartUI и вызываем метод init()
         assertThat(tracker.getAll().get(0).getName(), is("test name")); // проверяем, что нулевой элемент массива в трекере содержит имя, введённое при эмуляции.
@@ -64,7 +65,7 @@ public class StartUITest {
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
         // создаём Tracker
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         //Напрямую добавляем заявку
         Item item = tracker.add(new Item());
         //создаём StubInput с последовательностью действий
@@ -76,7 +77,7 @@ public class StartUITest {
     }
     @Test
     public void whenDeleteThenTrackerHasDeletedValue() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item item = tracker.add(new Item());
         Input input = new StubInput(new String[]{"3", item.getId(), "y"});
         new StartUI(input, tracker, output).init();
@@ -84,7 +85,7 @@ public class StartUITest {
     }
     @Test
     public  void whenTrackerShowAllItems() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item one = new Item("one", "testOne");
         Item two = new Item("two", "testTwo");
         Item three = new Item("three", "testThree");
@@ -107,7 +108,7 @@ public class StartUITest {
     }
     @Test
     public  void whenUserFindByItemByIdThenTrackerFindByItemById() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item first = new Item("first", "test1");
         Item second = new Item("second", "test2");
         Item third = new Item("third", "test3");
@@ -128,7 +129,7 @@ public class StartUITest {
     }
     @Test
     public void whenUserFindItemBNameThenTrackerFindItemByName() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Item one = new Item("one", "testOne");
         Item two = new Item("two", "testTwo");
         Item three = new Item("three", "testThree");
@@ -150,7 +151,7 @@ public class StartUITest {
 
     @Test
     public void whenAddItemWithStubInputThenTrackerAddItem() {
-        Tracker tracker = new Tracker();
+        ITracker tracker = new Tracker();
         Input input = new StubInput(new String[]{"0", "newtestname", "newtestdescription", "y"});
         new StartUI(input, tracker, output).init();
         assertThat(new String(out.toByteArray()), is(MENU));

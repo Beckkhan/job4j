@@ -1,15 +1,16 @@
 package ru.job4j.tracker.start;
 
 import ru.job4j.tracker.models.*;
+import ru.job4j.tracker.ITracker;
 import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * @author Vyacheslav Khan (beckkhan@mail.ru)
- * @version 9.0
- * @since 16.05.2018
+ * @version 10.0
+ * @since 03.03.2019
  */
-public class Tracker {
+public class Tracker implements ITracker {
 
     /** items - список заявок, теперь используем ArrayList вместо обычного массива */
     private final List<Item> items = new ArrayList<>();

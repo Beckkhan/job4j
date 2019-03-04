@@ -1,5 +1,6 @@
 package ru.job4j.tracker.start;
 
+import ru.job4j.tracker.ITracker;
 import ru.job4j.tracker.models.Item;
 
 import java.util.function.Consumer;
@@ -7,8 +8,8 @@ import java.util.function.Consumer;
 /**
  * Класс MenuTracker с заменой вывода в консоль на Consumer.
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1
- * @since 23.01.2019
+ * @version 3.0
+ * @since 03.03.2019
  **/
 class EditItem extends BaseAction {
 
@@ -16,7 +17,7 @@ class EditItem extends BaseAction {
         super(key, name);
     }
 
-    public void execute(Input input, Tracker tracker) {
+    public void execute(Input input, ITracker tracker) {
         String id = input.ask("Enter the id of the item to be edited:");
         String name = input.ask("Enter the name of the item to be edited:");
         String desc = input.ask("Enter the description of the item to be edited:");
@@ -28,11 +29,11 @@ class EditItem extends BaseAction {
 public class MenuTracker {
 
     private Input input;
-    private Tracker tracker;
+    private ITracker tracker;
     private final Consumer<String> output;
     private UserAction[] actions = new UserAction[6];
 
-    public MenuTracker(Input input, Tracker tracker, Consumer<String> output) {
+    public MenuTracker(Input input, ITracker tracker, Consumer<String> output) {
         this.input = input;
         this.tracker = tracker;
         this.output = output;
@@ -74,7 +75,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String name = input.ask("Please, enter the task name: ");
             String desc = input.ask("Please, enter the task description: ");
             tracker.add(new Item(name, desc));
@@ -88,7 +89,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             for (Item item : tracker.getAll()) {
                 output.accept(String.format("%s. %s", item.getId(), item.getName()));
             }
@@ -102,7 +103,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Please enter the id of the item to be deleted: ");
             tracker.delete(id);
         }
@@ -115,7 +116,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String id = input.ask("Enter the ID to search for the item:");
             Item item = tracker.findById(id);
             output.accept("Found item with id: " + item.getId() + " and name: " + item.getName());
@@ -129,7 +130,7 @@ public class MenuTracker {
         }
 
         @Override
-        public void execute(Input input, Tracker tracker) {
+        public void execute(Input input, ITracker tracker) {
             String name = input.ask("Enter the name to search for the item:");
             for (Item item : tracker.findByName(name)) {
                 output.accept("Found item with name: " + name + " and id: " + item.getId());
