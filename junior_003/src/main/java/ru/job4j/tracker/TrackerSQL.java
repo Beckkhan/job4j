@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 03.03.2019
  */
 public class TrackerSQL implements ITracker, AutoCloseable {
@@ -146,7 +146,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
                 item = new Item(
                         rs.getString("item_name"),
                         rs.getString("description"),
-                        rs.getInt("id")
+                        rs.getString("id")
                 );
             }
         } catch (SQLException e) {
