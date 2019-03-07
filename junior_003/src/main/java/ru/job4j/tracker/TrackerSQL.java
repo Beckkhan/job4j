@@ -4,30 +4,27 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import ru.job4j.tracker.models.Item;
-import java.io.InputStream;
 import java.sql.*;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Properties;
 
 import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
- * @since 03.03.2019
+ * @version 4.0
+ * @since 07.03.2019
  */
 public class TrackerSQL implements ITracker, AutoCloseable {
     private static final Logger LOGGER = LogManager.getLogger(TrackerSQL.class.getName());
 
     private Connection connection;
 
-    public TrackerSQL() {
-        this.init();
+    public TrackerSQL(Connection connection) {
+        this.connection = connection;
     }
 
-    public boolean init() {
+    /*public boolean init() {
         try (InputStream in = TrackerSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties properties = new Properties();
             properties.load(in);
@@ -42,9 +39,9 @@ public class TrackerSQL implements ITracker, AutoCloseable {
             LOGGER.error(e.getMessage(), e);
         }
         return this.connection != null;
-    }
+    }*/
 
-    public void setTableItems() {
+    /*public void setTableItems() {
         try (PreparedStatement prepStatement =
                      this.connection.prepareStatement(
                              "create table if not exists items (id serial primary key, item_name varchar(200), description text, created timestamp, comments text);")
@@ -53,7 +50,7 @@ public class TrackerSQL implements ITracker, AutoCloseable {
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
         }
-    }
+    }*/
 
     @Override
     public Item add(Item item) {
