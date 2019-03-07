@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
+ * @version 3.0
  * @since 07.03.2019
  */
 public class TrackerSQLTest {
@@ -55,7 +55,7 @@ public class TrackerSQLTest {
     public void whenAddItemThanFindSameItem() throws Exception {
         try (TrackerSQL trackerSQL = new TrackerSQL(ConnectionRollback.create(this.init()))) {
             String id = trackerSQL.add(new Item("item1", "description1")).getId();
-            assertThat(trackerSQL.findById(id).getName(), is("item1"));
+            assertThat(trackerSQL.findByName("item1").size(), is(1));
         }
     }
 
@@ -64,7 +64,7 @@ public class TrackerSQLTest {
         try (TrackerSQL trackerSQL = new TrackerSQL(ConnectionRollback.create(this.init()))) {
             String id = trackerSQL.add(new Item("item2", "description2")).getId();
             trackerSQL.delete(id);
-            assertThat(trackerSQL.findById(id), nullValue());
+            assertThat(trackerSQL.getAll().size(), is(0));
         }
     }
 
