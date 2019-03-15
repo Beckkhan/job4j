@@ -2,8 +2,8 @@ package ru.job4j.jdbc;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 05.03.2019
+ * @version 2.0
+ * @since 15.03.2019
  */
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
@@ -19,7 +19,7 @@ public class ParserSAX extends DefaultHandler {
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
-        if (qName.equalsIgnoreCase("entry")) {
+        if ("entry".equalsIgnoreCase(qName)) {
             String field = attributes.getValue("field");
             sum += Integer.valueOf(field);
         }
