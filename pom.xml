@@ -57,6 +57,7 @@
         <module>junior_002</module>
         <module>junior_input_output</module>
         <module>junior_003</module>
+        <module>junior_004</module>
     </modules>
 
     <dependencies>
