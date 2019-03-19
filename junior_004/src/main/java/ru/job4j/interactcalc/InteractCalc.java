@@ -11,14 +11,14 @@ import java.util.regex.Pattern;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 16.03.2019
+ * @version 2.0
+ * @since 19.03.2019
  */
 public class InteractCalc {
-    private final Calculator calculator;
+    protected final Calculator calculator;
     private final Scanner scanner;
-    private Double result;
-    private Map<String, BiConsumer<Double, Double>> operations = new HashMap<>();
+    protected Double result;
+    protected Map<String, BiConsumer<Double, Double>> operations = new HashMap<>();
 
     /**
      * Creating a constructor.
