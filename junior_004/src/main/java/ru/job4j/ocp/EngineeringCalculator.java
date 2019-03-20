@@ -8,8 +8,8 @@ import java.util.regex.Pattern;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 19.03.2019
+ * @version 2.0
+ * @since 20.03.2019
  */
 public class EngineeringCalculator extends InteractCalc {
 
@@ -18,8 +18,8 @@ public class EngineeringCalculator extends InteractCalc {
      * We introduce them to our HashMap.
      */
     @Override
-    protected void setOperations() {
-        super.setOperations();
+    public void setCalculationFunctions() {
+        super.setCalculationFunctions();
         load("sin", functionSinus());
         load("cos", functionCosinus());
     }
@@ -32,7 +32,7 @@ public class EngineeringCalculator extends InteractCalc {
      */
     private BiConsumer<Double, Double> functionSinus() {
         return (operandFirst, operandSecond) ->
-                this.result = Math.sin(Math.toRadians(operandFirst));
+                setResult(Math.sin(Math.toRadians(operandFirst)));
     }
 
     /**
@@ -43,7 +43,7 @@ public class EngineeringCalculator extends InteractCalc {
      */
     private BiConsumer<Double, Double> functionCosinus() {
         return (operandFirst, operandSecond) ->
-                this.result = Math.cos(Math.toRadians(operandFirst));
+                setResult(Math.cos(Math.toRadians(operandFirst)));
     }
 
     /**
@@ -58,15 +58,15 @@ public class EngineeringCalculator extends InteractCalc {
                 String operation = expression.substring(0, 3);
                 String getOperand = expression.substring(3);
                 Double operandFirst;
-                if (getOperand.isEmpty() && this.result != null) {
-                    operandFirst = this.result;
+                if (getOperand.isEmpty() && this.getResult() != null) {
+                    operandFirst = this.getResult();
                     System.out.println("Рассчитываем " + operation + " угла " + operandFirst);
-                    this.operations.get(operation).accept(operandFirst, null);
+                    this.getOperations().get(operation).accept(operandFirst, null);
                 } else {
                     operandFirst = Double.valueOf(getOperand);
                     System.out.println("Рассчитываем " + operation + " угла " + operandFirst);
-                    this.operations.get(operation).accept(operandFirst, null);
-                    this.result = calculator.getResult();
+                    this.getOperations().get(operation).accept(operandFirst, null);
+                    this.setResult(getCalculator().getResult());
                 }
             } else {
                 return super.execute(expression);
@@ -80,8 +80,8 @@ public class EngineeringCalculator extends InteractCalc {
      * for the correct verification of new operators available for input.
      */
     @Override
-    protected boolean checkExpression(String expression) {
-        boolean result = false;
+    public boolean checkExpression(String expression) {
+        boolean result;
         if (expression.contains("cos") || expression.contains("sin")) {
             Pattern p = Pattern.compile("[cosin]{3}\\d*+");
             Matcher m = p.matcher(expression);

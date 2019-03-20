@@ -11,14 +11,15 @@ import java.util.regex.Pattern;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 19.03.2019
+ * @version 3.0
+ * @since 20.03.2019
  */
 public class InteractCalc {
-    protected final Calculator calculator;
+
+    private final Calculator calculator;
     private final Scanner scanner;
-    protected Double result;
-    protected Map<String, BiConsumer<Double, Double>> operations = new HashMap<>();
+    private Double result;
+    private Map<String, BiConsumer<Double, Double>> operations = new HashMap<>();
 
     /**
      * Creating a constructor.
@@ -26,7 +27,7 @@ public class InteractCalc {
     public InteractCalc() {
         this.scanner = new Scanner(System.in);
         this.calculator = new Calculator();
-        this.setOperations();
+        this.setCalculationFunctions();
     }
 
     /**
@@ -35,7 +36,7 @@ public class InteractCalc {
      * the value for the key will be the corresponding functional interface,
      * in our case a function that does not return value - BiConsumer.
      */
-    protected void setOperations() {
+    public void setCalculationFunctions() {
         this.load("+", functionAdd());
         this.load("-", functionSubtract());
         this.load("/", functionDiv());
@@ -47,7 +48,7 @@ public class InteractCalc {
      * @param operation
      * @param function
      */
-    protected void load(String operation, BiConsumer<Double, Double> function) {
+    public void load(String operation, BiConsumer<Double, Double> function) {
         this.operations.put(operation, function);
     }
 
@@ -91,6 +92,7 @@ public class InteractCalc {
      * This method processes the expression entered by the user.
      * Using a regular expression, we find out which operator and operands are present.
      * @param expression
+     * @return boolean
      */
     public boolean execute(String expression) {
         boolean isCorrect = this.checkExpression(expression);
@@ -124,7 +126,7 @@ public class InteractCalc {
     /**
      * With this method, we display the result of the calculation on the screen.
      */
-    private void printResult(boolean valid) {
+    public void printResult(boolean valid) {
         if (valid) {
             System.out.println(this.result);
         } else {
@@ -137,7 +139,7 @@ public class InteractCalc {
      * @param expression
      * @return boolean
      */
-    protected boolean checkExpression(String expression) {
+    public boolean checkExpression(String expression) {
         Pattern p = Pattern.compile("\\d*+[+\\/\\*-]+\\d+");
         Matcher m = p.matcher(expression);
         return m.find();
@@ -163,5 +165,33 @@ public class InteractCalc {
     public static void main(String[] args) {
         InteractCalc iCalc = new InteractCalc();
         iCalc.run();
+    }
+
+    /**
+     * The getter for the variable result.
+     */
+    public Double getResult() {
+        return this.result;
+    }
+
+    /**
+     * The setter for the variable result.
+     */
+    public void setResult(Double result) {
+        this.result = result;
+    }
+
+    /**
+     * The getter for the variable operations.
+     */
+    public Map <String, BiConsumer <Double, Double>> getOperations() {
+        return this.operations;
+    }
+
+    /**
+     * The getter for the variable calculator.
+     */
+    public Calculator getCalculator() {
+        return calculator;
     }
 }
