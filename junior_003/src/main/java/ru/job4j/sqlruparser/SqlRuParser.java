@@ -13,8 +13,8 @@ import java.util.*;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 15.03.2019
+ * @version 2.0
+ * @since 20.03.2019
  */
 public class SqlRuParser {
 
@@ -26,11 +26,11 @@ public class SqlRuParser {
 
     private SqlRuDatabase sqlRuDatabase;
 
-    private static boolean stopParsing = false;
+    private boolean stopParsing = false;
 
-    String linkYear;
+    private String linkYear;
 
-    String linkDay;
+    private String linkDay;
 
     public SqlRuParser(Connection connection) {
         this.sqlRuDatabase = new SqlRuDatabase(connection);
