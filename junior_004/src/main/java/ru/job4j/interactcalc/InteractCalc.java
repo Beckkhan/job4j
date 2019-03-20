@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
+ * @version 4.0
  * @since 20.03.2019
  */
 public class InteractCalc {
@@ -184,7 +184,7 @@ public class InteractCalc {
     /**
      * The getter for the variable operations.
      */
-    public Map <String, BiConsumer <Double, Double>> getOperations() {
+    public Map<String, BiConsumer<Double, Double>> getOperations() {
         return this.operations;
     }
 
