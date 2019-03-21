@@ -8,20 +8,22 @@ import java.util.regex.Pattern;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 20.03.2019
+ * @version 3.0
+ * @since 21.03.2019
  */
 public class EngineeringCalculator extends InteractCalc {
+
+    public static final Pattern ECPATTERN = Pattern.compile("[cosin]{3}\\d*+");
 
     /**
      * Our calculator has been enhanced to calculate the cosine and sine functions.
      * We introduce them to our HashMap.
      */
     @Override
-    public void setCalculationFunctions() {
-        super.setCalculationFunctions();
-        load("sin", functionSinus());
-        load("cos", functionCosinus());
+    public void loadActs() {
+        super.loadActs();
+        this.getOperations().put("sin", functionSinus());
+        this.getOperations().put("cos", functionCosinus());
     }
 
     /**
@@ -83,8 +85,7 @@ public class EngineeringCalculator extends InteractCalc {
     public boolean checkExpression(String expression) {
         boolean result;
         if (expression.contains("cos") || expression.contains("sin")) {
-            Pattern p = Pattern.compile("[cosin]{3}\\d*+");
-            Matcher m = p.matcher(expression);
+            Matcher m = ECPATTERN.matcher(expression);
             result = m.find();
         } else {
             result = super.checkExpression(expression);

@@ -11,11 +11,12 @@ import java.util.regex.Pattern;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 4.0
- * @since 20.03.2019
+ * @version 5.0
+ * @since 21.03.2019
  */
 public class InteractCalc {
 
+    public static final Pattern ICPATTERN = Pattern.compile("\\d*+[+\\/\\*-]+\\d+");
     private final Calculator calculator;
     private final Scanner scanner;
     private Double result;
@@ -27,7 +28,7 @@ public class InteractCalc {
     public InteractCalc() {
         this.scanner = new Scanner(System.in);
         this.calculator = new Calculator();
-        this.setCalculationFunctions();
+        this.loadActs();
     }
 
     /**
@@ -36,20 +37,11 @@ public class InteractCalc {
      * the value for the key will be the corresponding functional interface,
      * in our case a function that does not return value - BiConsumer.
      */
-    public void setCalculationFunctions() {
-        this.load("+", functionAdd());
-        this.load("-", functionSubtract());
-        this.load("/", functionDiv());
-        this.load("*", functionMultiple());
-    }
-
-    /**
-     * Initialize our HashMap operations.
-     * @param operation
-     * @param function
-     */
-    public void load(String operation, BiConsumer<Double, Double> function) {
-        this.operations.put(operation, function);
+    public void loadActs() {
+        this.operations.put("+", functionAdd());
+        this.operations.put("-", functionSubtract());
+        this.operations.put("/", functionDiv());
+        this.operations.put("*", functionMultiple());
     }
 
     /**
@@ -140,8 +132,7 @@ public class InteractCalc {
      * @return boolean
      */
     public boolean checkExpression(String expression) {
-        Pattern p = Pattern.compile("\\d*+[+\\/\\*-]+\\d+");
-        Matcher m = p.matcher(expression);
+        Matcher m = ICPATTERN.matcher(expression);
         return m.find();
     }
 
