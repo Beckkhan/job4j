@@ -13,29 +13,29 @@ import java.util.*;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 20.03.2019
+ * @version 3.0
+ * @since 21.03.2019
  */
 public class SqlRuParser {
 
     private static final Logger LOGGER = LogManager.getLogger(StartSqlRuParser.class.getName());
 
-    private ParserConfig parserConfig = new ParserConfig();
+    private ParserConfig config = new ParserConfig();
 
-    private static List<Vacancy> vacancyList = new ArrayList<>();
+    private static List<Vacancy> vacancies = new ArrayList<>();
 
-    private SqlRuDatabase sqlRuDatabase;
+    private SqlRuDatabase database;
 
-    private boolean stopParsing = false;
+    private boolean stop = false;
 
-    private String linkYear;
+    private String year;
 
-    private String linkDay;
+    private String day;
 
     public SqlRuParser(Connection connection) {
-        this.sqlRuDatabase = new SqlRuDatabase(connection);
-        this.linkYear = this.parserConfig.get("linkYear");
-        this.linkDay = this.parserConfig.get("linkDay");
+        this.database = new SqlRuDatabase(connection);
+        this.year = this.config.get("linkYear");
+        this.day = this.config.get("linkDay");
         this.doFirstParsing();
     }
 
@@ -50,7 +50,7 @@ public class SqlRuParser {
             String vacancyDate = inner.text();
             LocalDateTime actualDate = this.getDateFromString(vacancyDate);
             if (actualDate.isBefore(LocalDateTime.now().minusYears(1))) {
-                stopParsing = true;
+                stop = true;
                 break;
             }
             Element element1 = tableRaws.get(i).child(0);
@@ -65,11 +65,11 @@ public class SqlRuParser {
             Elements elements2 = doc2.getElementsByAttributeValue("class", "msgBody");
             Element element2 = elements2.get(1);
             String description = element2.text();
-            vacancyList.add(new Vacancy(name, description, urlOnVacancy, actualDate));
+            vacancies.add(new Vacancy(name, description, urlOnVacancy, actualDate));
         }
-        this.sqlRuDatabase.addListOfVacancies(vacancyList);
-        this.vacancyList.clear();
-        LOGGER.info(String.format("New vacancies found: %s", vacancyList.size()));
+        this.database.addListOfVacancies(vacancies);
+        this.vacancies.clear();
+        LOGGER.info(String.format("New vacancies found: %s", vacancies.size()));
     }
 
     private LocalDateTime getDateFromString(String date) {
@@ -122,10 +122,10 @@ public class SqlRuParser {
 
     public void doFirstParsing() {
         try {
-            stopParsing = false;
+            stop = false;
             int i = 0;
-            while (!stopParsing) {
-                toParseVacancyInfo(this.linkYear + i++);
+            while (!stop) {
+                toParseVacancyInfo(this.year + i++);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -133,9 +133,9 @@ public class SqlRuParser {
     }
 
     public void doNextParsing() {
-        stopParsing = false;
+        stop = false;
         try {
-            toParseVacancyInfo(this.linkDay);
+            toParseVacancyInfo(this.day);
         } catch (IOException e) {
             e.printStackTrace();
         }
