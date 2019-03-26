@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 25.03.2019
+ * @version 2.0
+ * @since 26.03.2019
  */
 public class Food {
 
@@ -14,13 +14,17 @@ public class Food {
     private LocalDate createDate;
     private float price;
     private int discount;
+    private boolean canReproduct;
+    private boolean isVegetable;
 
-    public Food(String name, LocalDate expireDate, LocalDate createDate, float price) {
+    public Food(String name, LocalDate expireDate, LocalDate createDate, float price, boolean canReproduct, boolean isVegetable) {
         this.name = name;
         this.expireDate = expireDate;
         this.createDate = createDate;
         this.price = price;
         this.discount = 0;
+        this.canReproduct = canReproduct;
+        this.isVegetable = isVegetable;
     }
 
     @Override
@@ -65,5 +69,13 @@ public class Food {
 
     public void setDiscount(int discount) {
         this.discount = discount;
+    }
+
+    public boolean isCanReproduct() {
+        return canReproduct;
+    }
+
+    public boolean isVegetable() {
+        return isVegetable;
     }
 }
