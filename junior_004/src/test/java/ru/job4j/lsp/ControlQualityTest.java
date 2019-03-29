@@ -13,8 +13,8 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 26.03.2019
+ * @version 3.0
+ * @since 29.03.2019
  */
 public class ControlQualityTest {
 
@@ -67,31 +67,31 @@ public class ControlQualityTest {
 
     @After
     public void cleanAfterTest() {
-        controlQuality.clearNewfoods();
+        controlQuality.clearNewFoods();
     }
 
     @Test
     public void whenCheckFoodStorage() {
-        controlQuality.selectStoreForAllTypesFood();
-        assertThat(controlQuality.getShop().showFoodStore().get(0).getName(), is("Milk"));
-        assertTrue(controlQuality.getShop().showFoodStore().get(0).getDiscount() == 50);
+        controlQuality.selectStore();
+        assertThat(controlQuality.showStore("shop").showFoodStore().get(0).getName(), is("Milk"));
+        assertTrue(controlQuality.showStore("shop").showFoodStore().get(0).getDiscount() == 50);
     }
 
     @Test
     public void whenAddBadFoodThenTrash() {
-        controlQuality.selectStoreForAllTypesFood();
-        assertThat(controlQuality.getTrash().showFoodStore().get(0).getName(), is("Bread"));
+        controlQuality.selectStore();
+        assertThat(controlQuality.showStore("trash").showFoodStore().get(0).getName(), is("Bread"));
     }
 
     @Test
     public void whenCheckColdWarehouse() {
-        controlQuality.selectStoreForAllTypesFood();
-        assertThat(controlQuality.getCold().showFoodStore().get(0).getName(), is("Tomatoes"));
+        controlQuality.selectStore();
+        assertThat(controlQuality.showStore("cold").showFoodStore().get(0).getName(), is("Tomatoes"));
     }
 
     @Test
     public void whenCheckRecycleWarehouse() {
-        controlQuality.selectStoreForAllTypesFood();
-        assertThat(controlQuality.getRecycle().showFoodStore().get(0).getName(), is("Chicken"));
+        controlQuality.selectStore();
+        assertThat(controlQuality.showStore("recycle").showFoodStore().get(0).getName(), is("Chicken"));
     }
 }

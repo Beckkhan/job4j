@@ -2,10 +2,12 @@ package ru.job4j.lsp;
 
 import java.time.LocalDate;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
  * @version 2.0
- * @since 26.03.2019
+ * @since 29.03.2019
  */
 public class Food {
 
@@ -41,6 +43,13 @@ public class Food {
                 price,
                 discount
         );
+    }
+
+    public int calculateUsage() {
+        LocalDate today = LocalDate.now();
+        double life = (int) DAYS.between(this.getCreateDate(), this.getExpireDate());
+        double elapsed = (int) DAYS.between(this.getCreateDate(), today);
+        return (int) ((elapsed / life) * 100);
     }
 
     public String getName() {
