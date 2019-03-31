@@ -6,8 +6,8 @@ import java.util.Map;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
- * @since 29.03.2019
+ * @version 4.0
+ * @since 31.03.2019
  */
 public class ControlQuality {
 
@@ -30,6 +30,7 @@ public class ControlQuality {
         for (Food food : this.arrivals) {
             ds.checkFood(food);
         }
+        this.clearNewFoods();
     }
 
     public void clearNewFoods() {
@@ -38,5 +39,14 @@ public class ControlQuality {
 
     public Store showStore(String storeName) {
         return this.stores.get(storeName);
+    }
+
+    public void resort() {
+        for (Store store : stores.values()) {
+            for (Food food : store.showFoodStore()) {
+                this.receiveIncomingFood(food);
+            }
+        }
+        this.selectStore();
     }
 }
