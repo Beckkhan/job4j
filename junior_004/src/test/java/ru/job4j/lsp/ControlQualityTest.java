@@ -4,8 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.LocalDate;
-import java.time.Month;
+import java.time.LocalDate;;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
@@ -13,8 +12,8 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 4.0
- * @since 29.03.2019
+ * @version 5.0
+ * @since 03.04.2019
  */
 public class ControlQualityTest {
 
@@ -29,32 +28,32 @@ public class ControlQualityTest {
         controlQuality = new ControlQuality();
         milk = new Food(
                 "Milk",
-                LocalDate.of(2019, Month.APRIL, 5),
-                LocalDate.of(2019, Month.MARCH, 1),
+                LocalDate.of(2019, LocalDate.now().getMonth(), LocalDate.now().plusDays(1).getDayOfMonth()),
+                LocalDate.of(2019, LocalDate.now().minusMonths(1).getMonth(), 28),
                 100F,
                 false,
                 false
         );
         bread = new Food(
                 "Bread",
-                LocalDate.of(2019, Month.MARCH, 6),
-                LocalDate.of(2019, Month.MARCH, 1),
+                LocalDate.of(2019, LocalDate.now().minusMonths(1).getMonth(), 10),
+                LocalDate.of(2019, LocalDate.now().minusMonths(1).getMonth(), 5),
                 50F,
                 false,
                 false
         );
         tomatoes = new Food(
                 "Tomatoes",
-                LocalDate.of(2019, Month.APRIL, 30),
-                LocalDate.of(2019, Month.MARCH, 25),
+                LocalDate.of(2019, LocalDate.now().getMonth(), LocalDate.now().plusDays(15).getDayOfMonth()),
+                LocalDate.of(2019, LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth()),
                 100F,
                 false,
                 true
         );
         chicken = new Food(
                 "Chicken",
-                LocalDate.of(2019, Month.MARCH, 25),
-                LocalDate.of(2019, Month.FEBRUARY, 25),
+                LocalDate.of(2019, LocalDate.now().minusMonths(1).getMonth(), 25),
+                LocalDate.of(2019, LocalDate.now().minusMonths(2).getMonth(), 25),
                 150F,
                 true,
                 false
