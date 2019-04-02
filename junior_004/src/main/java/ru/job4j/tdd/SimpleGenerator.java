@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 02.04.2019
  */
 public class SimpleGenerator {
@@ -16,7 +16,7 @@ public class SimpleGenerator {
         String result = template;
         Pattern pattern = Pattern.compile("\\$[{a-z}]*");
         Matcher matcher = pattern.matcher(result);
-        HashSet<String> keys = new HashSet<String>();
+        HashSet<String> keys = new HashSet<>();
         while (matcher.find()) {
             String key = matcher.group().substring(2, matcher.group().length() - 1);
             keys.add(key);

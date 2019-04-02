@@ -13,7 +13,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
+ * @version 4.0
  * @since 29.03.2019
  */
 public class ControlQualityTest {
@@ -29,7 +29,7 @@ public class ControlQualityTest {
         controlQuality = new ControlQuality();
         milk = new Food(
                 "Milk",
-                LocalDate.of(2019, Month.APRIL, 1),
+                LocalDate.of(2019, Month.APRIL, 5),
                 LocalDate.of(2019, Month.MARCH, 1),
                 100F,
                 false,
