@@ -6,21 +6,17 @@ import java.util.Map;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 4.0
- * @since 31.03.2019
+ * @version 5.0
+ * @since 03.04.2019
  */
 public class ControlQuality {
 
     private List<Food> arrivals = new ArrayList<>();
 
-    private Map<String, Store> stores;
+    private final DispatchStore ds = new DispatchStore();
 
-    private final DispatchStore ds;
+    private Map<String, Store> stores = ds.showStores();
 
-    public ControlQuality() {
-        this.ds = new DispatchStore();
-        this.stores = ds.showStores();
-    }
 
     public void receiveIncomingFood(Food food) {
         this.arrivals.add(food);
