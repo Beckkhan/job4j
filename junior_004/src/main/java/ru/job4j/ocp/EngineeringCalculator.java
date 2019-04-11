@@ -8,12 +8,12 @@ import java.util.regex.Pattern;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
- * @since 21.03.2019
+ * @version 4.0
+ * @since 12.04.2019
  */
 public class EngineeringCalculator extends InteractCalc {
 
-    public static final Pattern ECPATTERN = Pattern.compile("[cosin]{3}\\d*+");
+    public static final Pattern ECP = Pattern.compile("[cosin]{3}\\d*+");
 
     /**
      * Our calculator has been enhanced to calculate the cosine and sine functions.
@@ -79,13 +79,13 @@ public class EngineeringCalculator extends InteractCalc {
 
     /**
      * We extend the capabilities of the method
-     * for the correct verification of new operators available for input.
+     * for the correct verification of new operators available for io.
      */
     @Override
     public boolean checkExpression(String expression) {
         boolean result;
         if (expression.contains("cos") || expression.contains("sin")) {
-            Matcher m = ECPATTERN.matcher(expression);
+            Matcher m = ECP.matcher(expression);
             result = m.find();
         } else {
             result = super.checkExpression(expression);
