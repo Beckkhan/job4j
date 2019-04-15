@@ -1,0 +1,43 @@
+Оценивалось срабатывание различных типов сборщиков мусора
+для программы из первого урока данного модуля.
+
+Для более объективной оценки было вдвое увеличено количество
+создаваемых объектов - 10000, т.к. на меньших количествах
+время работы программы отличалось незначительно.
+
+Результаты приведены ниже.
+
+Serial Collector (command line option -XX:+UseSerialGC)
+614, 522, 363, 379, 410: average 458
+
+Parallel Collector (command line option -XX:+UseParallelGC)
+260, 437, 391, 286, 398: average 354
+
+Parallel Compacting Collector (command line option -XX:+UseParallelOldGC)
+459, 371, 292, 339, 444, 277, 217, 387: average 348
+
+Concurrent Mark-Sweep (CMS) Collector (command line option -XX:+UseConcMarkSweepGC)
+294, 354, 618, 348, 274, 613, 391, 399: average 411
+
+Concurrent Mark-Sweep (CMS) Collector в режиме Incremental Mode (command line option –XX:+CMSIncrementalMode)
+445, 373, 276, 290, 301, 389, 371, 396: average 355
+
+В данной программе наибольшая эффективность получена
+при использовании Parallel Collector, Parallel Compacting Collector и CMS Collector.
+
+Для приложения заявок из второго модуля подойдет любой коллектор,
+поскольку вся работа происходит в консоли между пользователем и компьютером.
+Допускаю, что наиболее быстро будет работать Parallel Compacting Collector.
+
+Для серверного приложения максимально эффективным будет использование CMS Collector.
+Об этом сказано в официальной документации "Memory Management in the Java HotSpot™ Virtual Machine"
+от Sun Microsystems на странице 13:
+"...When to Use the CMS Collector
+Use the CMS collector if your application needs shorter garbage collection pauses and can afford to
+share processor resources with the garbage collector when the application is running. (Due to its
+concurrency, the CMS collector takes CPU cycles away from the application during a collection cycle.)
+Typically, applications that have a relatively large set of long-lived data (a large old generation), and that
+run on machines with two or more processors, tend to benefit from the use of this collector. An example
+would be web servers. The CMS collector should be considered for any application with a low pause time
+requirement. It may also give good results for interactive applications with old generations of a modest
+size on a single processor..."

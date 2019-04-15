@@ -2,8 +2,8 @@ package ru.job4j;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 14.04.2019
+ * @version 2.0
+ * @since 15.04.2019
  */
 public class MemoryUsage {
 
@@ -32,12 +32,14 @@ public class MemoryUsage {
 
     public static void main(String[] args) {
         System.out.println("start");
+        long start = System.currentTimeMillis();
         info();
-        for (int i = 1; i < 5001; i++) {
+        for (int i = 1; i < 10001; i++) {
             System.out.println(new User(("User No." + i), Integer.valueOf(i * 1000)));
         }
         System.out.println("finish");
         info();
+        System.out.println(String.format("Time spent: %d ms.", (System.currentTimeMillis() - start)));
     }
 
     public static void info() {
