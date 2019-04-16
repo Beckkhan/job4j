@@ -10,7 +10,7 @@ import static org.junit.Assert.assertTrue;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 16.04.2019
  */
 public class SoftReferenceCacheTest {
@@ -45,5 +45,12 @@ public class SoftReferenceCacheTest {
         assertTrue(softReferenceCache.showFileContent(fileAddress.getName()).equals(address));
         fileNames.delete();
         fileAddress.delete();
+    }
+
+    @Test (expected = NullPointerException.class)
+    public void whenFileNotPresent() {
+        File filePhones = new File(System.getProperty("java.io.tmpdir"), "Phones.txt");
+        SoftReferenceCache softReferenceCache = new SoftReferenceCache(System.getProperty("java.io.tmpdir"));
+        softReferenceCache.showFileContent(filePhones.getName());
     }
 }
