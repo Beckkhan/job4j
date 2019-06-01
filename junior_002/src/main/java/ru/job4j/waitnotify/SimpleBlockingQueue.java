@@ -6,8 +6,8 @@ import ru.job4j.list.*;
 
 /**
  * @author Vyacheslav Khan (beckkhan@mail.ru)
- * @version 1.0
- * @since 04.01.2019
+ * @version 2.0
+ * @since 02.06.2019
  */
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
@@ -15,7 +15,7 @@ public class SimpleBlockingQueue<T> {
      * Очередь для хранения элементов.
      */
     @GuardedBy("this")
-    private final SimpleQueue<T> queue = new SimpleQueue<>();
+    private SimpleQueue<T> queue = new SimpleQueue<>();
     private boolean block = false;
 
     /**
