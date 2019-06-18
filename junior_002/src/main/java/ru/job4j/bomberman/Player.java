@@ -2,19 +2,20 @@ package ru.job4j.bomberman;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 15.06.2019
+ * @version 2.0
+ * @since 18.06.2019
  */
-public class Player extends Thread {
+public abstract class Player extends Thread {
     /**
      * The playing field on which the movement of the player will occur.
      */
-    private final Board board;
+    final Board board;
     /**
      * Constructor to create a player and associate it with the playing field.
      * @param board the playing field
      */
-    public Player(Board board) {
+    public Player(Board board, String name) {
+        super(name);
         this.board = board;
     }
     /**
@@ -25,15 +26,21 @@ public class Player extends Thread {
         Board.Cell start = board.startingPosition();
         while (!Thread.currentThread().isInterrupted()) {
             try {
-                Board.Cell next;
-                do {
-                    next = board.selectCell(start);
-                } while (!board.move(start, next));
+                Board.Cell next = makeStep(start);
                 start = next;
-                Thread.sleep(board.getStepTime());
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
             }
         }
     }
+
+    /**
+     * The method contains the logic of making a move by the player.
+     * The method returns the cell on which the move is made.
+     *
+     * @param start current position
+     * @return the cell on which the move is made
+     * @throws InterruptedException in case of thread interruption during the player's turn
+     */
+    public abstract Board.Cell makeStep(Board.Cell start) throws InterruptedException;
 }
