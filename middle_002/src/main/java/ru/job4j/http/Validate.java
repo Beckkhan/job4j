@@ -1,8 +1,10 @@
 package ru.job4j.http;
 
+import java.util.List;
+
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 20.06.2019
  */
 public interface Validate {
@@ -13,7 +15,7 @@ public interface Validate {
 
     String delete(User user);
 
-    String findById(User user);
+    User findById(User user);
 
-    String findAll();
+    List<User> findAll();
 }

@@ -1,8 +1,10 @@
 package ru.job4j.http;
 
+import java.util.List;
+
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 20.06.2019
  */
 public class ValidateService implements Validate {
@@ -53,23 +55,12 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public String findById(User user) {
-        String result = "No such user was found.";
-        if (this.validateUser(user)) {
-            this.store.findById(user);
-            result = String.format("The User with the ID%s was successfully found.", user.getId());
-        }
-        return result;
+    public User findById(User user) {
+        return this.store.findById(user);
     }
 
     @Override
-    public String findAll() {
-        String result;
-        if (this.store.findAll().size() == 0) {
-            result = "Storage is empty.";
-        } else {
-            result = this.store.findAll().toString();
-        }
-        return result;
+    public List<User> findAll() {
+        return store.findAll();
     }
 }

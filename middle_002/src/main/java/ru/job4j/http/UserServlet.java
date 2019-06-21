@@ -11,7 +11,7 @@ import java.util.function.Function;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 20.06.2019
  */
 public class UserServlet extends HttpServlet {
@@ -42,9 +42,9 @@ public class UserServlet extends HttpServlet {
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         String id = req.getParameter("id");
         if (id == null) {
-            writer.append(logic.findAll());
+            writer.append(logic.findAll().toString());
         } else {
-            writer.append(logic.findById(buildUser(req)));
+            writer.append(logic.findById(buildUser(req)).toString());
         }
         writer.flush();
     }

@@ -5,7 +5,7 @@ import java.util.Objects;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
+ * @version 2.0
  * @since 20.06.2019
  */
 public class User {
@@ -21,6 +21,16 @@ public class User {
         this.name = name;
         this.login = login;
         this.email = email;
+    }
+
+    public User(String name, String login, String email) {
+        this.name = name;
+        this.login = login;
+        this.email = email;
+    }
+
+    public User(String id) {
+        this.id = id;
     }
 
     public String getId() {
