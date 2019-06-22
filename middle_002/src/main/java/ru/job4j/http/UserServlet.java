@@ -4,15 +4,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 20.06.2019
+ * @version 3.0
+ * @since 22.06.2019
  */
 public class UserServlet extends HttpServlet {
     /**
@@ -38,15 +37,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("text/html");
-        PrintWriter writer = new PrintWriter(resp.getOutputStream());
-        String id = req.getParameter("id");
-        if (id == null) {
-            writer.append(logic.findAll().toString());
-        } else {
-            writer.append(logic.findById(buildUser(req)).toString());
-        }
-        writer.flush();
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 
     @Override
@@ -54,10 +45,8 @@ public class UserServlet extends HttpServlet {
         String action = req.getParameter("action");
         if (actions.containsKey(action)) {
             User user = buildUser(req);
-            resp.setContentType("text/html");
-            PrintWriter writer = new PrintWriter(resp.getOutputStream());
-            writer.append(actions.get(action).apply(user));
-            writer.flush();
+            actions.get(action).apply(user);
+            resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
         } else {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
