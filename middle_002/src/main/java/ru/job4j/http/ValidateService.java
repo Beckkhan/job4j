@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 20.06.2019
+ * @version 3.0
+ * @since 23.06.2019
  */
 public class ValidateService implements Validate {
 
@@ -22,7 +22,7 @@ public class ValidateService implements Validate {
 
     private boolean validateUser(User user) {
         boolean result = false;
-        if (this.store.findById(user) != null) {
+        if (user.getId() != null && this.store.findById(user) != null) {
             result = true;
         }
         return result;
