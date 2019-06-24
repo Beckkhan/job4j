@@ -8,8 +8,8 @@ import java.util.stream.IntStream;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 18.06.2019
+ * @version 3.0
+ * @since 24.06.2019
  */
 public class Board {
     /**
@@ -155,11 +155,9 @@ public class Board {
      * It is called when the game ends.
      */
     public void stop() {
-        synchronized (this) {
-            gameStatus = false;
-        }
-        //player.interrupt();
-        //enemies.forEach(Thread::interrupt);
+        gameStatus = false;
+        player.interrupt();
+        enemies.forEach(Thread::interrupt);
     }
 
     /**
@@ -177,7 +175,6 @@ public class Board {
         if (isLock) {
             crossChecking(source);
             field[source.x][source.y].lock.unlock();
-
         }
         return isLock && source != target;
     }
@@ -252,9 +249,7 @@ public class Board {
         boolean cross = Thread.currentThread() == player
                 ? current.lock.hasQueuedThreads() : current.lock.hasQueuedThread(player);
         if (cross) {
-            synchronized (this) {
-                gameStatus = false;
-            }
+            gameStatus = false;
         }
     }
 
