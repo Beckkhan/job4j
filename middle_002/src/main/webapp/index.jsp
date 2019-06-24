@@ -1,5 +1,6 @@
 <%@ page import="ru.job4j.http.User" %>
-<%@ page import="ru.job4j.http.ValidateService" %><%--
+<%@ page import="ru.job4j.http.ValidateService" %>
+<%--
   User: Khan Vyacheslav (mailto: beckkhan@mail.ru)
   Date: 24.06.2019
   Time: 2:48
@@ -43,7 +44,7 @@
     <% } %>
 </table>
 <br/>
-<form action="<%=request.getContextPath()%>/create" method='get'>
+<form action="<%=request.getContextPath()%>/create" method="get">
     <input type='submit' value='Create New User'/>
 </form>
 </body>

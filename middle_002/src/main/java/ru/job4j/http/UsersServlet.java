@@ -7,7 +7,7 @@ import java.io.IOException;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 4.0
+ * @version 5.0
  * @since 24.06.2019
  */
 public class UsersServlet extends HttpServlet {
