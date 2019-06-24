@@ -8,8 +8,8 @@ import java.io.PrintWriter;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
- * @since 23.06.2019
+ * @version 4.0
+ * @since 24.06.2019
  */
 public class UserCreateServlet extends HttpServlet {
 
@@ -29,7 +29,7 @@ public class UserCreateServlet extends HttpServlet {
                 + "<form action='" + req.getContextPath() + "/create' method='post'>"
                 + "Name   : <input type='text' name='name'/><br/>"
                 + "Login  : <input type='text' name='login'/><br/>"
-                + "E-mail : <input type='text' name='email'/><br/>"
+                + "E-Mail : <input type='text' name='email'/><br/>"
                 + "<input type='submit' value='Create User'/></form>"
                 + "</form>"
                 + "<br/>"

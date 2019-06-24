@@ -8,8 +8,8 @@ import java.io.PrintWriter;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
- * @since 23.06.2019
+ * @version 4.0
+ * @since 24.06.2019
  */
 public class UserUpdateServlet extends HttpServlet {
 
