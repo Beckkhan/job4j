@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 20.06.2019
+ * @version 2.0
+ * @since 27.06.2019
  */
 public class MemoryStore implements Store {
 
@@ -33,11 +33,11 @@ public class MemoryStore implements Store {
      * @return new User Id
      */
     @Override
-    public String add(User user) {
+    public User add(User user) {
         user.setId(String.valueOf(idCounter.incrementAndGet()));
         user.setCreateDate(LocalDate.now());
         users.put(user.getId(), user);
-        return String.valueOf(user.getId());
+        return user;
     }
 
     /**

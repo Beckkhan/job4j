@@ -4,14 +4,14 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
- * @since 23.06.2019
+ * @version 4.0
+ * @since 27.06.2019
  */
 public class ValidateService implements Validate {
 
     private static final ValidateService INSTANCE = new ValidateService();
 
-    private final Store store = MemoryStore.getInstance();
+    private final Store store = DbStore.getInstance();
 
     private ValidateService() {
     }
@@ -31,7 +31,7 @@ public class ValidateService implements Validate {
     @Override
     public String add(User user) {
         String result = "This user already exists";
-        return this.validateUser(user) ? result : String.format("Added user with ID %s.", store.add(user));
+        return this.validateUser(user) ? result : String.format("Added user with ID %s.", store.add(user).getId());
     }
 
     @Override

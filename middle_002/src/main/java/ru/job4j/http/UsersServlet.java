@@ -7,8 +7,8 @@ import java.io.IOException;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 5.0
- * @since 24.06.2019
+ * @version 6.0
+ * @since 27.06.2019
  */
 public class UsersServlet extends HttpServlet {
 
@@ -22,6 +22,7 @@ public class UsersServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html");
         String id = req.getParameter("id");
         if (!id.isEmpty()) {
