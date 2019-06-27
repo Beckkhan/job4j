@@ -1,5 +1,6 @@
 package ru.job4j.http;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,7 +8,7 @@ import java.io.IOException;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 6.0
+ * @version 7.0
  * @since 27.06.2019
  */
 public class UsersServlet extends HttpServlet {
@@ -15,8 +16,9 @@ public class UsersServlet extends HttpServlet {
     private final Validate logic = ValidateService.getInstance();
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        req.setAttribute("users", logic.findAll());
+        req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
     }
 
 
@@ -28,6 +30,6 @@ public class UsersServlet extends HttpServlet {
         if (!id.isEmpty()) {
             logic.delete(new User(id));
         }
-        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        resp.sendRedirect(String.format("%s/", req.getContextPath()));
     }
 }
