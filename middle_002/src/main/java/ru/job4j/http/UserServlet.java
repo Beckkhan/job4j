@@ -12,8 +12,8 @@ import java.util.function.Function;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 4.0
- * @since 23.06.2019
+ * @version 5.0
+ * @since 01.07.2019
  */
 public class UserServlet extends HttpServlet {
 
@@ -34,8 +34,10 @@ public class UserServlet extends HttpServlet {
         }
         String name = req.getParameter("name");
         String login = req.getParameter("login");
+        String password = req.getParameter("password");
         String email = req.getParameter("email");
-        return new User(id, name, login, email);
+        Role role = Role.valueOf(req.getParameter("role"));
+        return new User(id, name, login, password, email, role);
     }
 
     @Override

@@ -12,6 +12,7 @@
 <form action="${pageContext.servletContext.contextPath}/create" method="post">
     Name   : <input type="text" name="name"/><br/>
     Login  : <input type="text" name="login"/><br/>
+    Password  : <input type="text" name="password"/><br/>
     E-Mail : <input type="text" name="email"/><br/>
     <input type="submit" value="Create User"/>
 </form>

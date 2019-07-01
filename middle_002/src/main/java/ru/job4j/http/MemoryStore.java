@@ -9,8 +9,8 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 27.06.2019
+ * @version 3.0
+ * @since 01.07.2019
  */
 public class MemoryStore implements Store {
 
@@ -78,5 +78,39 @@ public class MemoryStore implements Store {
     @Override
     public List<User> findAll() {
         return new ArrayList<>(users.values());
+    }
+
+    @Override
+    public User findByLogin(User user) {
+        User result = null;
+        for (User next : this.findAll()) {
+            if (next.getLogin().equals(user.getLogin())) {
+                result = next;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean isCredential(String login, String password) {
+        boolean result = false;
+        for (User next : findAll()) {
+            if (login.equals(next.getLogin()) && password.equals(next.getPassword())) {
+                result = true;
+                break;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean resetRole(User user) {
+        boolean result = false;
+        User reset = users.get(user.getId());
+        if (reset != null) {
+            reset.setRole(user.getRole());
+            result = true;
+        }
+        return result;
     }
 }

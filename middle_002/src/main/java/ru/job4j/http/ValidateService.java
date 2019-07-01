@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 4.0
- * @since 27.06.2019
+ * @version 5.0
+ * @since 01.07.2019
  */
 public class ValidateService implements Validate {
 
@@ -62,5 +62,20 @@ public class ValidateService implements Validate {
     @Override
     public List<User> findAll() {
         return store.findAll();
+    }
+
+    @Override
+    public boolean resetRole(User user) {
+        return store.resetRole(user);
+    }
+
+    @Override
+    public User findByLogin(User user) {
+        return store.findByLogin(user);
+    }
+
+    @Override
+    public boolean isCredential(String login, String password) {
+        return store.isCredential(login, password);
     }
 }

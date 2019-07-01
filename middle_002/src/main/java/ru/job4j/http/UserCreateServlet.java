@@ -8,8 +8,8 @@ import java.io.IOException;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 7.0
- * @since 27.06.2019
+ * @version 8.0
+ * @since 01.07.2019
  */
 public class UserCreateServlet extends HttpServlet {
 
@@ -25,8 +25,9 @@ public class UserCreateServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         String name = req.getParameter("name");
         String login = req.getParameter("login");
+        String password = req.getParameter("password");
         String email = req.getParameter("email");
-        logic.add(new User(name, login, email));
+        logic.add(new User("", name, login, email, password, Role.USER));
         resp.sendRedirect(String.format("%s/create", req.getContextPath()));
     }
 }

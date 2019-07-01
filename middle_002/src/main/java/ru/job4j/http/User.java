@@ -5,40 +5,74 @@ import java.util.Objects;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
- * @since 27.06.2019
+ * @version 4.0
+ * @since 01.07.2019
  */
 public class User {
 
     private String id;
     private String name;
     private String login;
+    private String password;
     private String email;
     private LocalDate createDate;
-
-    public User(String id, String name, String login, String email) {
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.email = email;
-    }
-
-    public User(String id, String name, String login, String email, LocalDate createDate) {
-        this.id = id;
-        this.name = name;
-        this.login = login;
-        this.email = email;
-        this.createDate = createDate;
-    }
-
-    public User(String name, String login, String email) {
-        this.name = name;
-        this.login = login;
-        this.email = email;
-    }
+    private Role role;
 
     public User(String id) {
         this.id = id;
+    }
+
+    public User(String id, String login) {
+        this.id = id;
+        this.login = login;
+    }
+
+    public User(String id, Role role) {
+        this.id = id;
+        this.role = role;
+    }
+
+    public User(String id, String name, String login, String password, String email) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+    }
+
+    public User(String id, String name, String login, String password, String email, Role role) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.role = role;
+    }
+
+    public User(String id, String name, String login, String password, String email, LocalDate createDate, Role role) {
+        this.id = id;
+        this.name = name;
+        this.login = login;
+        this.password = password;
+        this.email = email;
+        this.createDate = createDate;
+        this.role = role;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
+    public int getPriority() {
+        return this.role.getPriority();
     }
 
     public String getId() {
@@ -102,6 +136,6 @@ public class User {
 
     @Override
     public String toString() {
-        return String.format("User id: %s, name: %s, email: %s, from: %s", id, name, email, createDate);
+        return String.format("User id: %s, name: %s, login:%s, email: %s, from: %s", id, name, login, email, createDate);
     }
 }

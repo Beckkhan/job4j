@@ -9,8 +9,8 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 27.06.2019
+ * @version 2.0
+ * @since 01.07.2019
  */
 public class DbStore implements Store {
 
@@ -38,13 +38,15 @@ public class DbStore implements Store {
         try (
                 Connection con = SOURCE.getConnection();
                 PreparedStatement ps = con.prepareStatement(
-                        "insert into users(name, login, email, created) values(?, ?, ?, now());",
+                        "insert into users(name, login, email, created, password, role) values(?, ?, ?, now(), ?, ?);",
                         Statement.RETURN_GENERATED_KEYS
                 )
         ) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getEmail());
+            ps.setString(4, user.getPassword());
+            ps.setString(5, user.getRole().toString());
             ps.executeUpdate();
             ResultSet resultSet = ps.getGeneratedKeys();
             if (resultSet.next()) {
@@ -62,13 +64,15 @@ public class DbStore implements Store {
         try (
                 Connection con = SOURCE.getConnection();
                 PreparedStatement ps = con.prepareStatement(
-                        "update users set name=?, login=?, email=? where id=?;"
+                        "update users set name=?, login=?, email=?, password=?, role=? where id=?;"
                 )
         ) {
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getEmail());
-            ps.setInt(4, Integer.parseInt(user.getId()));
+            ps.setString(4, user.getPassword());
+            ps.setString(5, user.getRole().toString());
+            ps.setInt(6, Integer.parseInt(user.getId()));
             result = ps.executeUpdate() > 0;
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -109,12 +113,14 @@ public class DbStore implements Store {
                         String.valueOf(rs.getInt("id")),
                         rs.getString("name"),
                         rs.getString("login"),
+                        rs.getString("password"),
                         rs.getString(String.valueOf("email")),
-                        rs.getTimestamp("created").toLocalDateTime().toLocalDate()
+                        rs.getTimestamp("created").toLocalDateTime().toLocalDate(),
+                        Role.valueOf(rs.getString("role"))
                 );
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
         }
         return result;
     }
@@ -134,11 +140,80 @@ public class DbStore implements Store {
                                 String.valueOf(rs.getInt("id")),
                                 rs.getString("name"),
                                 rs.getString("login"),
+                                rs.getString("password"),
                                 rs.getString(String.valueOf("email")),
-                                rs.getTimestamp("created").toLocalDateTime().toLocalDate()
+                                rs.getTimestamp("created").toLocalDateTime().toLocalDate(),
+                                Role.valueOf(rs.getString("role"))
                         )
                 );
             }
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return result;
+    }
+
+    @Override
+    public User findByLogin(User user) {
+        User result = null;
+        try (
+                Connection con = SOURCE.getConnection();
+                PreparedStatement ps = con.prepareStatement(
+                        "select * from users where login = ?;"
+                )
+        ) {
+            ps.setString(1, user.getLogin());
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result = new User(
+                        String.valueOf(rs.getInt("id")),
+                        rs.getString("name"),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getString(String.valueOf("email")),
+                        rs.getTimestamp("created").toLocalDateTime().toLocalDate(),
+                        Role.valueOf(rs.getString("role"))
+                );
+            }
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean isCredential(String login, String password) {
+        boolean result = false;
+        try (
+                Connection connection = SOURCE.getConnection();
+                PreparedStatement ps = connection.prepareStatement(
+                        "select * from users where login=? and password=?;"
+                )
+        ) {
+            ps.setString(1, login);
+            ps.setString(2, password);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result = true;
+            }
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return result;
+    }
+
+    @Override
+    public boolean resetRole(User user) {
+        boolean result = false;
+        try (
+                Connection connection = SOURCE.getConnection();
+                PreparedStatement ps = connection.prepareStatement(
+                        "update users set role=? where id=?"
+                )
+        ) {
+            ps.setString(1, user.getRole().toString());
+            ps.setInt(2, Integer.parseInt(user.getId()));
+            result = ps.executeUpdate() > 0;
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }

@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 20.06.2019
+ * @version 3.0
+ * @since 01.07.2019
  */
 public interface Validate {
 
@@ -18,4 +18,10 @@ public interface Validate {
     User findById(User user);
 
     List<User> findAll();
+
+    boolean isCredential(String login, String password);
+
+    User findByLogin(User user);
+
+    boolean resetRole(User user);
 }

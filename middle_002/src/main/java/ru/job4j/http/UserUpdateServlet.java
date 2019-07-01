@@ -8,8 +8,8 @@ import java.io.IOException;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 6.0
- * @since 27.06.2019
+ * @version 7.0
+ * @since 01.07.2019
  */
 public class UserUpdateServlet extends HttpServlet {
 
@@ -23,13 +23,23 @@ public class UserUpdateServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         req.setCharacterEncoding("UTF-8");
         String id = req.getParameter("id");
         String name = req.getParameter("name");
-        String login = req.getParameter("login");
+        String oldLogin = req.getParameter("oldLogin");
+        String oldPassword = req.getParameter("oldPassword");
+        String newLogin = req.getParameter("login");
+        String newPassword = req.getParameter("password");
         String email = req.getParameter("email");
-        logic.update(new User(id, name, login, email));
-        resp.sendRedirect(String.format("%s/edit?id=%s", req.getContextPath(), id));
+        String strRole = req.getParameter("role");
+        Role role = strRole.equals("ADMIN") ? Role.ADMIN : Role.USER;
+        logic.update(new User(id, name, newLogin, newPassword, email, role));
+        if (!oldLogin.equals(newLogin) || !oldPassword.equals(newPassword)) {
+            req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+        } else {
+            req.setAttribute("users", ValidateService.getInstance().findAll());
+            req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
+        }
     }
 }

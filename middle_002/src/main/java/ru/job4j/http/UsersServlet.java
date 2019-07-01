@@ -8,8 +8,8 @@ import java.io.IOException;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 7.0
- * @since 27.06.2019
+ * @version 8.0
+ * @since 01.07.2019
  */
 public class UsersServlet extends HttpServlet {
 
@@ -20,7 +20,6 @@ public class UsersServlet extends HttpServlet {
         req.setAttribute("users", logic.findAll());
         req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
     }
-
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
