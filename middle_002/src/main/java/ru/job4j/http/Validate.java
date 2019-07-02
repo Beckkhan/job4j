@@ -4,16 +4,16 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
- * @since 01.07.2019
+ * @version 4.0
+ * @since 02.07.2019
  */
 public interface Validate {
 
-    String add(User user);
+    User add(User user);
 
-    String update(User user);
+    User update(User user);
 
-    String delete(User user);
+    User delete(User user);
 
     User findById(User user);
 

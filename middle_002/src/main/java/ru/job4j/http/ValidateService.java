@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 5.0
- * @since 01.07.2019
+ * @version 6.0
+ * @since 02.07.2019
  */
 public class ValidateService implements Validate {
 
@@ -16,7 +16,7 @@ public class ValidateService implements Validate {
     private ValidateService() {
     }
 
-    public static ValidateService getInstance() {
+    public static Validate getInstance() {
         return INSTANCE;
     }
 
@@ -29,27 +29,31 @@ public class ValidateService implements Validate {
     }
 
     @Override
-    public String add(User user) {
-        String result = "This user already exists";
-        return this.validateUser(user) ? result : String.format("Added user with ID %s.", store.add(user).getId());
-    }
-
-    @Override
-    public String update(User user) {
-        String result = "No such user was found.";
-        if (this.validateUser(user)) {
-            this.store.update(user);
-            result = "The user data is updated";
+    public User add(User user) {
+        User result = null;
+        if (!this.validateUser(user)) {
+            this.store.add(user).getId();
+            result = user;
         }
         return result;
     }
 
     @Override
-    public String delete(User user) {
-        String result = "No such user was found.";
+    public User update(User user) {
+        User result = null;
+        if (this.validateUser(user)) {
+            this.store.update(user);
+            result = user;
+        }
+        return result;
+    }
+
+    @Override
+    public User delete(User user) {
+        User result = null;
         if (this.validateUser(user)) {
             this.store.delete(user);
-            result = String.format("The User with the ID%s was successfully removed.", user.getId());
+            result = user;
         }
         return result;
     }

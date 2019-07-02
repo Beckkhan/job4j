@@ -8,8 +8,8 @@ import java.io.IOException;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 7.0
- * @since 01.07.2019
+ * @version 8.0
+ * @since 02.07.2019
  */
 public class UserUpdateServlet extends HttpServlet {
 
@@ -36,9 +36,9 @@ public class UserUpdateServlet extends HttpServlet {
         Role role = strRole.equals("ADMIN") ? Role.ADMIN : Role.USER;
         logic.update(new User(id, name, newLogin, newPassword, email, role));
         if (!oldLogin.equals(newLogin) || !oldPassword.equals(newPassword)) {
-            req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
+            resp.sendRedirect(String.format("%s/signin", req.getContextPath()));
         } else {
-            req.setAttribute("users", ValidateService.getInstance().findAll());
+            req.setAttribute("users", logic.findAll());
             req.getRequestDispatcher("/WEB-INF/views/index.jsp").forward(req, resp);
         }
     }

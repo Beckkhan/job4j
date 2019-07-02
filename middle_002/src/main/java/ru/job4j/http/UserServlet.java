@@ -12,14 +12,14 @@ import java.util.function.Function;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 5.0
- * @since 01.07.2019
+ * @version 6.0
+ * @since 02.07.2019
  */
 public class UserServlet extends HttpServlet {
 
     private final Validate logic = ValidateService.getInstance();
 
-    private final Map<String, Function<User, String>> actions = new HashMap<>();
+    private final Map<String, Function<User, User>> actions = new HashMap<>();
 
     {
         actions.put("add", logic::add);
@@ -61,7 +61,7 @@ public class UserServlet extends HttpServlet {
             User user = buildUser(req);
             resp.setContentType("text/html");
             PrintWriter writer = new PrintWriter(resp.getOutputStream());
-            writer.append(actions.get(action).apply(user));
+            writer.append(actions.get(action).apply(user).toString());
             writer.flush();
         } else {
             resp.sendError(HttpServletResponse.SC_BAD_REQUEST);
