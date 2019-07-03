@@ -7,8 +7,8 @@ import java.util.Map;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 02.07.2019
+ * @version 2.0
+ * @since 03.07.2019
  */
 public class ValidateStub implements Validate {
 
@@ -38,7 +38,7 @@ public class ValidateStub implements Validate {
     }
 
     @Override
-    public User findById( User user ) {
+    public User findById(User user) {
         return null;
     }
 
@@ -48,17 +48,17 @@ public class ValidateStub implements Validate {
     }
 
     @Override
-    public boolean isCredential( String login, String password ) {
+    public boolean isCredential(String login, String password) {
         return false;
     }
 
     @Override
-    public User findByLogin( User user ) {
+    public User findByLogin(User user) {
         return null;
     }
 
     @Override
-    public boolean resetRole( User user ) {
+    public boolean resetRole(User user) {
         return false;
     }
 }
