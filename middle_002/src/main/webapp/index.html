@@ -7,6 +7,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script>
+        function validate() {
+            var message = '';
+            var result = (($('#name').val() != '') && ($('#lastname').val() != '') && ($('#description').val() != ''));
+            message += (($('#name').val() == '') ? "Field \"Name\" is not filled.\n" : "");
+            message += (($('#lastname').val() == '') ? "Field \"Lastname\" is not filled.\n" : "");
+            message += (($('#description').val() == '') ? "Field \"Description\" is not filled.\n" : "");
+            if (!result) {
+                alert(message);
+            }
+            return result;
+        }
+    </script>
+
 </head>
 <body>
 
@@ -27,15 +42,15 @@
             <input type="text" class="form-control" id="lastname">
         </div>
         <div class="form-group">
-            <h4>Please select your gender:</h4>
-            <input type="radio" name="gender" value="male" checked> Male<br>
-            <input type="radio" name="gender" value="female"> Female<br>
+            <label for="gender">Gender :</label>
+            <label class="radio-inline"><input type="radio" name="gender" id="gender" checked>Male</label>
+            <label class="radio-inline"><input type="radio" name="gender">Female</label>
         </div>
         <div class="form-group">
             <label for="description">Description:</label>
             <input type="description" class="form-control" id="description">
         </div>
-        <button type="submit" class="btn btn-default">Enter Data</button>
+        <button type="submit" class="btn btn-default" onclick="return validate();">Enter Data</button>
     </form>
 </div>
 
