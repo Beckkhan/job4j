@@ -9,6 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <script>
+
         function validate() {
             var message = '';
             var result = (($('#name').val() != '') && ($('#lastname').val() != '') && ($('#description').val() != ''));
@@ -35,8 +36,48 @@
                 '</tr>';
                 $('#table tr:last').after(row);
             }
+            document.getElementById("form").reset();
             return false;
         }
+
+        function createUser() {
+            if (validate()) {
+                var name = document.getElementById("name").value;
+                var lastName = document.getElementById("lastname").value;
+                var genders = document.getElementsByName("gender");
+                var description = document.getElementById("description").value;
+                var gender;
+                if (genders[0].checked) {
+                    gender = "male";
+                } else if (genders[1].checked) {
+                    gender = "female";
+                }
+                console.log(name, lastName, gender, description);
+                var user = {"name": name, "lastName": lastName, "gender": gender, "description": description};
+                $.ajax({
+                    type: "POST",
+                    url: "./json",
+                    method: "post",
+                    data: JSON.stringify(user),
+                    success: makeFromJson,
+                    dataType: "json"
+                });
+                document.getElementById("form").reset();
+            }
+        }
+
+        function makeFromJson(data) {
+            console.log(data);
+            clearTable();
+            $.each(data, function (key, value) {
+                $('#table tr:last').after('<tr><td>' + value.name + '</td><td>' + value.lastName + '</td><td>' + value.gender + '</td><td>' + value.description + '</td></tr>');
+            });
+        }
+
+        function clearTable() {
+            $("#table tr").not(":first").remove();
+        }
+
     </script>
 
 </head>
@@ -49,7 +90,7 @@
 
 <div class="container">
     <h3>Enter the following information:</h3>
-    <form action>
+    <form action id="form">
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name">
@@ -71,7 +112,7 @@
             <label for="description">Description:</label>
             <input type="description" class="form-control" id="description">
         </div>
-        <button type="submit" class="btn btn-default" onclick="return addRow();">Enter Data</button>
+        <input type="button" value="Ajax" onclick="return createUser();">
     </form>
 </div>
 
@@ -87,24 +128,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <td>John</td>
-            <td>Doe</td>
-            <td>Man</td>
-            <td>john@example.com</td>
-        </tr>
-        <tr>
-            <td>Mary</td>
-            <td>Moe</td>
-            <td>Woman</td>
-            <td>john@example.com</td>
-        </tr>
-        <tr>
-            <td>July</td>
-            <td>Dooley</td>
-            <td>Woman</td>
-            <td>john@example.com</td>
-        </tr>
         </tbody>
     </table>
 </div>
