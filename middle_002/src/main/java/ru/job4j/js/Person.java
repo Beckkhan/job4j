@@ -1,9 +1,11 @@
 package ru.job4j.js;
 
+import java.util.Objects;
+
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 1.0
- * @since 07.07.2019
+ * @version 2.0
+ * @since 09.07.2019
  */
 public class Person {
 
@@ -42,5 +44,29 @@ public class Person {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || this.getClass() != o.getClass()) {
+            return false;
+        }
+        Person person = (Person) o;
+        return Objects.equals(name, person.name)
+                && Objects.equals(lastName, person.lastName)
+                && Objects.equals(gender, person.gender);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, lastName, gender);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Person: name: %s, lastName:%s, gender: %s, description: %s", name, lastName, gender, description);
     }
 }

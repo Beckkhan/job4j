@@ -1,16 +1,15 @@
 package ru.job4j.http;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
- * @since 01.07.2019
+ * @version 4.0
+ * @since 09.07.2019
  */
 public class MemoryStore implements Store {
 
@@ -19,6 +18,11 @@ public class MemoryStore implements Store {
     private final AtomicInteger idCounter = new AtomicInteger();
 
     private final ConcurrentMap<String, User> users = new ConcurrentHashMap<>();
+
+    /**
+     * Map in which the keys are the city, and the values are the country of location of the city.
+     */
+    private final Map<String, String> location = new HashMap<>();
 
     private MemoryStore() {
     }
@@ -37,6 +41,7 @@ public class MemoryStore implements Store {
         user.setId(String.valueOf(idCounter.incrementAndGet()));
         user.setCreateDate(LocalDate.now());
         users.put(user.getId(), user);
+        this.location.putIfAbsent(user.getCity(), user.getCountry());
         return user;
     }
 
@@ -48,6 +53,7 @@ public class MemoryStore implements Store {
     @Override
     public boolean update(User user) {
         user.setCreateDate(LocalDate.now());
+        this.location.putIfAbsent(user.getCity(), user.getCountry());
         return user.getId() != null && users.replace(user.getId(), user) != null;
     }
 
@@ -112,5 +118,25 @@ public class MemoryStore implements Store {
             result = true;
         }
         return result;
+    }
+
+    @Override
+    public List<String> getCountries() {
+        Set<String> states = new TreeSet<>();
+        for (String country : this.location.values()) {
+            states.add(country);
+        }
+        return new ArrayList<>(states);
+    }
+
+    @Override
+    public List<String> getCitiesByCountry(String country) {
+        Set<String> places = new TreeSet<>();
+        for (String city : this.location.keySet()) {
+            if (this.location.get(city).equals(country)) {
+                places.add(city);
+            }
+        }
+        return new ArrayList<>(places);
     }
 }

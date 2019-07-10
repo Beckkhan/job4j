@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 6.0
- * @since 02.07.2019
+ * @version 7.0
+ * @since 10.07.2019
  */
 public class ValidateService implements Validate {
 
@@ -32,8 +32,7 @@ public class ValidateService implements Validate {
     public User add(User user) {
         User result = null;
         if (!this.validateUser(user)) {
-            this.store.add(user).getId();
-            result = user;
+            result = this.store.add(user);
         }
         return result;
     }
@@ -81,5 +80,15 @@ public class ValidateService implements Validate {
     @Override
     public boolean isCredential(String login, String password) {
         return store.isCredential(login, password);
+    }
+
+    @Override
+    public List<String> getCountries() {
+        return store.getCountries();
+    }
+
+    @Override
+    public List<String> getCitiesByCountry(String country) {
+        return store.getCitiesByCountry(country);
     }
 }

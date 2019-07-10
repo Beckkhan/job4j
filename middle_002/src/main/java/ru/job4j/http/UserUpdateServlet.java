@@ -8,8 +8,8 @@ import java.io.IOException;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 8.0
- * @since 02.07.2019
+ * @version 9.0
+ * @since 10.07.2019
  */
 public class UserUpdateServlet extends HttpServlet {
 
@@ -33,8 +33,13 @@ public class UserUpdateServlet extends HttpServlet {
         String newPassword = req.getParameter("password");
         String email = req.getParameter("email");
         String strRole = req.getParameter("role");
+        String country = req.getParameter("country");
+        String city = req.getParameter("city");
         Role role = strRole.equals("ADMIN") ? Role.ADMIN : Role.USER;
-        logic.update(new User(id, name, newLogin, newPassword, email, role));
+        User user = new User(id, name, newLogin, newPassword, email, role);
+        user.setCountry(country);
+        user.setCity(city);
+        logic.update(user);
         if (!oldLogin.equals(newLogin) || !oldPassword.equals(newPassword)) {
             resp.sendRedirect(String.format("%s/signin", req.getContextPath()));
         } else {

@@ -9,8 +9,8 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 2.0
- * @since 01.07.2019
+ * @version 3.0
+ * @since 09.07.2019
  */
 public class DbStore implements Store {
 
@@ -38,7 +38,7 @@ public class DbStore implements Store {
         try (
                 Connection con = SOURCE.getConnection();
                 PreparedStatement ps = con.prepareStatement(
-                        "insert into users(name, login, email, created, password, role) values(?, ?, ?, now(), ?, ?);",
+                        "insert into users(name, login, email, created, password, role, country, city) values(?, ?, ?, now(), ?, ?, ?, ?);",
                         Statement.RETURN_GENERATED_KEYS
                 )
         ) {
@@ -47,6 +47,8 @@ public class DbStore implements Store {
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getPassword());
             ps.setString(5, user.getRole().toString());
+            ps.setString(6, user.getCountry());
+            ps.setString(7, user.getCity());
             ps.executeUpdate();
             ResultSet resultSet = ps.getGeneratedKeys();
             if (resultSet.next()) {
@@ -64,7 +66,7 @@ public class DbStore implements Store {
         try (
                 Connection con = SOURCE.getConnection();
                 PreparedStatement ps = con.prepareStatement(
-                        "update users set name=?, login=?, email=?, password=?, role=? where id=?;"
+                        "update users set name=?, login=?, email=?, password=?, role=?, country=?, city=? where id=?;"
                 )
         ) {
             ps.setString(1, user.getName());
@@ -72,7 +74,9 @@ public class DbStore implements Store {
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getPassword());
             ps.setString(5, user.getRole().toString());
-            ps.setInt(6, Integer.parseInt(user.getId()));
+            ps.setString(6, user.getCountry());
+            ps.setString(7, user.getCity());
+            ps.setInt(8, Integer.parseInt(user.getId()));
             result = ps.executeUpdate() > 0;
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -118,6 +122,8 @@ public class DbStore implements Store {
                         rs.getTimestamp("created").toLocalDateTime().toLocalDate(),
                         Role.valueOf(rs.getString("role"))
                 );
+                result.setCountry(rs.getString("country"));
+                result.setCity(rs.getString("city"));
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -135,17 +141,20 @@ public class DbStore implements Store {
                 )
         ) {
             ResultSet rs = ps.executeQuery();
+            User next;
             while (rs.next()) {
-                result.add(new User(
-                                String.valueOf(rs.getInt("id")),
-                                rs.getString("name"),
-                                rs.getString("login"),
-                                rs.getString("password"),
-                                rs.getString(String.valueOf("email")),
-                                rs.getTimestamp("created").toLocalDateTime().toLocalDate(),
-                                Role.valueOf(rs.getString("role"))
-                        )
+                next = new User(
+                        String.valueOf(rs.getInt("id")),
+                        rs.getString("name"),
+                        rs.getString("login"),
+                        rs.getString("password"),
+                        rs.getString(String.valueOf("email")),
+                        rs.getTimestamp("created").toLocalDateTime().toLocalDate(),
+                        Role.valueOf(rs.getString("role"))
                 );
+                next.setCountry(rs.getString("country"));
+                next.setCity(rs.getString("city"));
+                result.add(next);
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -174,6 +183,8 @@ public class DbStore implements Store {
                         rs.getTimestamp("created").toLocalDateTime().toLocalDate(),
                         Role.valueOf(rs.getString("role"))
                 );
+                result.setCountry(rs.getString("country"));
+                result.setCity(rs.getString("city"));
             }
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
@@ -214,6 +225,45 @@ public class DbStore implements Store {
             ps.setString(1, user.getRole().toString());
             ps.setInt(2, Integer.parseInt(user.getId()));
             result = ps.executeUpdate() > 0;
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return result;
+    }
+
+    @Override
+    public List<String> getCountries() {
+        List<String> result = new ArrayList<>();
+        try (
+                Connection connection = SOURCE.getConnection();
+                PreparedStatement ps = connection.prepareStatement(
+                        "select title from country;"
+                )
+        ) {
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result.add(rs.getString("title"));
+            }
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        return result;
+    }
+
+    @Override
+    public List<String> getCitiesByCountry(String country) {
+        List<String> result = new ArrayList<>();
+        try (
+                Connection connection = SOURCE.getConnection();
+                PreparedStatement ps = connection.prepareStatement(
+                        "select city.title from city join country on city.country_id = country.id where country.title = ?;"
+                )
+        ) {
+            ps.setString(1, country);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                result.add(rs.getString("title"));
+            }
         } catch (Exception e) {
             LOGGER.error(e.getMessage(), e);
         }

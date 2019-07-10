@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 3.0
- * @since 01.07.2019
+ * @version 4.0
+ * @since 09.07.2019
  */
 public interface Store {
 
@@ -24,4 +24,8 @@ public interface Store {
     User findByLogin(User user);
 
     boolean resetRole(User user);
+
+    List<String> getCountries();
+
+    List<String> getCitiesByCountry(String country);
 }

@@ -4,8 +4,8 @@ import java.util.List;
 
 /**
  * @author Khan Vyacheslav (mailto: beckkhan@mail.ru)
- * @version 4.0
- * @since 02.07.2019
+ * @version 5.0
+ * @since 09.07.2019
  */
 public interface Validate {
 
@@ -24,4 +24,8 @@ public interface Validate {
     User findByLogin(User user);
 
     boolean resetRole(User user);
+
+    List<String> getCountries();
+
+    List<String> getCitiesByCountry(String country);
 }
