@@ -11,6 +11,7 @@ before_install:
   - psql -c "ALTER USER postgres WITH PASSWORD 'password';" -U postgres
   - psql -c 'create database tracker;' -U postgres
   - psql -c 'create database webstore;' -U postgres
+  - psql -c 'create database cinema;' -U postgres
 
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
@@ -19,6 +20,11 @@ sudo: false
 # Здесь используется сторонний сервис https://codecov.io/
 after_success:
   - bash <(curl -s https://codecov.io/bash)
+
+env:
+  global:
+    - CODECOV_TOKEN="cd8ada85-5e96-4020-b4b3-3cd272ac0861"
+
 # Отправлять уведомление на почту mailto: beckkhan@mail.ru если сборка упала
 notifications:
   email:
